@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@estela/kendo-theme — Design System</title>
+
+  <!-- Estela fonts — igual que el React DS oficial -->
+  <!-- Instrument Sans: body, labels, botones, captions (400/500/600) -->
+  <!-- Outfit: h1–h6 display/headings (300/400/500/600/700) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Estela theme: Kendo Material base + Estela brand token overrides.
+       Icons are embedded as SVG data-URIs — no external font CDN needed. -->
+  <link rel="stylesheet" href="../dist/all.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      background: #F1F5F8;
+      color: rgba(16, 20, 38, 0.87);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: 220px;
+      min-width: 220px;
+      background: #006A92;   /* primary dark — contraste 5.98:1 con blanco */
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    #sidebar .brand {
+      padding: 20px 16px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+    }
+
+    #sidebar .brand h1 {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #5FEFE8;   /* primary light — visible sobre primary dark */
+    }
+
+    #sidebar .brand p {
+      margin: 2px 0 0;
+      font-size: 11px;
+      opacity: 0.6;
+    }
+
+    #sidebar nav {
+      padding: 8px 0;
+      flex: 1;
+    }
+
+    #sidebar nav a {
+      display: block;
+      padding: 9px 20px;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    #sidebar nav a:hover,
+    #sidebar nav a.active {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+    }
+
+    #sidebar nav a.active {
+      border-left: 3px solid #5FEFE8;   /* primary light */
+      padding-left: 17px;
+    }
+
+    /* ── Main content ── */
+    #main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px 40px;
+    }
+
+    .section {
+      margin-bottom: 64px;
+      scroll-margin-top: 24px;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #006A92;              /* primary dark */
+      border-bottom: 2px solid #4255FF;   /* secondary */
+      padding-bottom: 8px;
+      margin: 0 0 24px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(16, 20, 38, 0.60);   /* text.secondary */
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 24px 0 12px;
+    }
+
+    /* ── Color swatches ── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .color-swatch {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    .color-swatch-block {
+      height: 72px;
+    }
+
+    .color-swatch-info {
+      background: #fff;
+      padding: 8px 10px;
+    }
+
+    .color-swatch-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: #333;
+      display: block;
+    }
+
+    .color-swatch-var {
+      font-size: 10px;
+      color: #888;
+      font-family: monospace;
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .color-swatch-hex {
+      font-size: 10px;
+      color: #555;
+      font-family: monospace;
+    }
+
+    /* ── Typography ── */
+    .type-scale-row {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .type-scale-meta {
+      min-width: 80px;
+      font-size: 11px;
+      color: #888;
+      font-family: monospace;
+    }
+
+    /* ── Component demos ── */
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .demo-card {
+      background: #fff;
+      border-radius: 4px;               /* shape.borderRadius = 4px */
+      padding: 20px;
+      border: 1px solid rgba(0,0,0,0.12);   /* divider — flat surface pattern */
+      box-shadow: none;
+      margin-bottom: 16px;
+    }
+
+    .demo-label {
+      font-size: 11px;
+      color: rgba(16, 20, 38, 0.60);   /* text.secondary */
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-field label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    #grid-demo, #scheduler-demo {
+      width: 100%;
+    }
+
+    /* Notification container */
+    #notification-container {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    /* Pager wrapper */
+    #pager-demo {
+      background: #fff;
+      border-radius: 4px;
+      padding: 12px;
+      border: 1px solid rgba(0,0,0,0.12);
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar navigation -->
+  <aside id="sidebar">
+    <div class="brand">
+      <h1>@estela/kendo-theme</h1>
+      <p>Design System v1.0</p>
+    </div>
+    <nav id="sidebar-nav">
+      <a href="#colors">Colors</a>
+      <a href="#typography">Typography</a>
+      <a href="#buttons">Buttons</a>
+      <a href="#forms">Forms</a>
+      <a href="#grid">Grid</a>
+      <a href="#charts">Charts</a>
+      <a href="#dialogs">Dialogs</a>
+      <a href="#notifications">Notifications</a>
+      <a href="#pager">Pager</a>
+      <a href="#tabs">Tabs</a>
+      <a href="#loaders">ProgressBar &amp; Loader</a>
+      <a href="#badges">Badge &amp; Chip</a>
+      <a href="#tooltips">Tooltip</a>
+      <a href="#avatars">Avatar</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main id="main">
+
+    <!-- ════════════════════════ COLORS ════════════════════════ -->
+    <section class="section" id="colors">
+      <h2 class="section-title">Colors</h2>
+
+      <div class="section-subtitle">Primary — Estela Blue</div>
+      <div class="color-grid" id="primary-swatches"></div>
+
+      <div class="section-subtitle">Secondary — Estela Amber</div>
+      <div class="color-grid" id="secondary-swatches"></div>
+
+      <div class="section-subtitle">Tertiary — Estela Teal</div>
+      <div class="color-grid" id="tertiary-swatches"></div>
+
+      <div class="section-subtitle">Semantic</div>
+      <div class="color-grid" id="semantic-swatches"></div>
+
+      <div class="section-subtitle">Surface &amp; Base</div>
+      <div class="color-grid" id="surface-swatches"></div>
+    </section>
+
+    <!-- ════════════════════════ TYPOGRAPHY ════════════════════════ -->
+    <section class="section" id="typography">
+      <h2 class="section-title">Typography</h2>
+      <div class="demo-card">
+        <div class="type-scale-row">
+          <span class="type-scale-meta">h1 · 2rem · 700</span>
+          <h1 style="margin:0;font-size:2rem;font-weight:700;line-height:1.2">Heading 1 — Plataforma de datos</h1>
+        </div>
+        <div class="type-scale-row">
+          <span class="type-scale-meta">h2 · 1.5rem · 700</span>
+          <h2 style="margin:0;font-size:1.5rem;font-weight:700;line-height:1.25">Heading 2 — Análisis exploratorio</h2>
+        </div>
+        <div class="type-scale-row">
+          <span class="type-scale-meta">h3 · 1.25rem · 600</span>
+          <h3 style="margin:0;font-size:1.25rem;font-weight:600;line-height:1.3">Heading 3 — Modelos predictivos</h3>
+        </div>
+        <div class="type-scale-row">
+          <span class="type-scale-meta">h4 · 1rem · 600</span>
+          <h4 style="margin:0;font-size:1rem;font-weight:600;line-height:1.4">Heading 4 — Segmentación</h4>
+        </div>
+        <div class="type-scale-row">
+          <span class="type-scale-meta">h5 · .875rem · 600</span>
+          <h5 style="margin:0;font-size:.875rem;font-weight:600;line-height:1.4">Heading 5 — Métricas de negocio</h5>
+        </div>
+        <div class="type-scale-row">
+          <span class="type-scale-meta">h6 · .75rem · 600</span>
+          <h6 style="margin:0;font-size:.75rem;font-weight:600;line-height:1.5;text-transform:uppercase;letter-spacing:.5px">Heading 6 — Label de sección</h6>
+        </div>
+        <div class="type-scale-row">
+          <span class="type-scale-meta">body · .875rem · 400</span>
+          <p style="margin:0">El análisis de datos te permite descubrir patrones ocultos, validar hipótesis y tomar decisiones informadas basadas en evidencia cuantitativa.</p>
+        </div>
+        <div class="type-scale-row">
+          <span class="type-scale-meta">small · .75rem · 400</span>
+          <small>Texto secundario: notas al pie, metadatos, timestamps y descripciones de apoyo.</small>
+        </div>
+        <div class="type-scale-row">
+          <span class="type-scale-meta">caption · .6875rem · 400</span>
+          <span style="font-size:.6875rem;color:#666">Caption: información contextual de gráficos y tablas.</span>
+        </div>
+        <div class="type-scale-row">
+          <span class="type-scale-meta">mono · .8125rem</span>
+          <code style="font-family:monospace;background:#f0f0f0;padding:2px 6px;border-radius:3px">SELECT * FROM usuarios WHERE activo = TRUE;</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ BUTTONS ════════════════════════ -->
+    <section class="section" id="buttons">
+      <h2 class="section-title">Buttons</h2>
+
+      <div class="section-subtitle">Fill Modes (con Primary)</div>
+      <div class="demo-card">
+        <div class="demo-label">solid · outline · flat · link · clear</div>
+        <div id="btn-fillmodes-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Theme Colors — Solid</div>
+      <div class="demo-card">
+        <div class="demo-label">base · primary · secondary · tertiary · info · success · warning · error · dark · light · inverse</div>
+        <div id="btn-solid-colors-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Theme Colors — Outline</div>
+      <div class="demo-card">
+        <div id="btn-outline-colors-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Theme Colors — Flat</div>
+      <div class="demo-card">
+        <div id="btn-flat-colors-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Theme Colors — Link</div>
+      <div class="demo-card">
+        <div id="btn-link-colors-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Theme Colors — Clear</div>
+      <div class="demo-card">
+        <div id="btn-clear-colors-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Sizes</div>
+      <div class="demo-card">
+        <div class="demo-label">sm · md · lg</div>
+        <div id="btn-sizes-row" class="demo-row" style="align-items:center"></div>
+      </div>
+
+      <div class="section-subtitle">Border Radius (rounded)</div>
+      <div class="demo-card">
+        <div class="demo-label">sm · md · lg · full</div>
+        <div id="btn-rounded-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Con Íconos</div>
+      <div class="demo-card">
+        <div class="demo-label">Ícono + texto</div>
+        <div id="btn-icons-row" class="demo-row"></div>
+        <div class="demo-label" style="margin-top:12px">Solo ícono</div>
+        <div id="btn-icons-only-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Estado Disabled</div>
+      <div class="demo-card">
+        <div class="demo-label">Todos los fill modes deshabilitados</div>
+        <div id="btn-disabled-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">SplitButton</div>
+      <div class="demo-card">
+        <div class="demo-label">Botón con menú de acciones secundarias</div>
+        <div id="btn-split-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">DropDownButton</div>
+      <div class="demo-card">
+        <div class="demo-label">Botón que despliega un menú</div>
+        <div id="btn-dropdown-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">ButtonGroup</div>
+      <div class="demo-card">
+        <div class="demo-label">Grupo de botones togglables (selección exclusiva)</div>
+        <div id="btn-group-row" class="demo-row" style="gap:20px;flex-wrap:wrap"></div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ FORMS ════════════════════════ -->
+    <section class="section" id="forms">
+      <h2 class="section-title">Forms</h2>
+
+      <div class="section-subtitle">Inputs</div>
+      <div class="demo-card">
+        <div class="form-row">
+          <div class="form-field">
+            <label>TextBox — Normal</label>
+            <input id="tb-normal" type="text" placeholder="Escribe aquí...">
+          </div>
+          <div class="form-field">
+            <label>TextBox — Disabled</label>
+            <input id="tb-disabled" type="text" value="Valor deshabilitado" disabled>
+          </div>
+          <div class="form-field">
+            <label>NumericTextBox</label>
+            <input id="ntb-1" type="number" value="42">
+          </div>
+          <div class="form-field">
+            <label>DatePicker</label>
+            <input id="dp-1">
+          </div>
+          <div class="form-field">
+            <label>DropDownList</label>
+            <select id="ddl-1">
+              <option>Seleccionar...</option>
+              <option>Opción A</option>
+              <option>Opción B</option>
+              <option>Opción C</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>MultiSelect</label>
+            <select id="ms-1" multiple>
+              <option>Etiqueta 1</option>
+              <option>Etiqueta 2</option>
+              <option>Etiqueta 3</option>
+              <option>Etiqueta 4</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="section-subtitle" style="margin-top:20px">Validation states</div>
+        <div class="form-row">
+          <div class="form-field">
+            <label>Con error</label>
+            <input id="tb-error" type="text" value="valor inválido">
+            <span class="k-form-error">Este campo es requerido.</span>
+          </div>
+          <div class="form-field">
+            <label>Read-only</label>
+            <input id="tb-readonly" type="text" value="Solo lectura" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-subtitle">Formulario de ejemplo — Registro de contacto</div>
+      <div class="demo-card">
+        <form id="contact-form" novalidate autocomplete="off">
+
+          <!-- Fila 1: Nombre + Apellido -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-nombre">Nombre <span style="color:var(--kendo-color-error,#ef4444)">*</span></label>
+              <input id="cf-nombre" type="text" placeholder="Ingresa el nombre">
+            </div>
+            <div class="form-field">
+              <label for="cf-apellido">Apellido <span style="color:var(--kendo-color-error,#ef4444)">*</span></label>
+              <input id="cf-apellido" type="text" placeholder="Ingresa el apellido">
+            </div>
+          </div>
+
+          <!-- Fila 2: Email + Teléfono -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-email">Correo electrónico <span style="color:var(--kendo-color-error,#ef4444)">*</span></label>
+              <input id="cf-email" type="email" placeholder="correo@empresa.com">
+            </div>
+            <div class="form-field">
+              <label for="cf-telefono">Teléfono</label>
+              <input id="cf-telefono" type="text" placeholder="+56 9 0000 0000">
+            </div>
+          </div>
+
+          <!-- Fila 3: País + Área -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-pais">País <span style="color:var(--kendo-color-error,#ef4444)">*</span></label>
+              <select id="cf-pais"></select>
+            </div>
+            <div class="form-field">
+              <label for="cf-area">Área</label>
+              <select id="cf-area"></select>
+            </div>
+          </div>
+
+          <!-- Fila 4: Fecha de ingreso + Monto estimado -->
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-fecha">Fecha de ingreso</label>
+              <input id="cf-fecha" type="text">
+            </div>
+            <div class="form-field">
+              <label for="cf-monto">Monto estimado (USD)</label>
+              <input id="cf-monto" type="number">
+            </div>
+          </div>
+
+          <!-- Fila 5: Etiquetas (MultiSelect) -->
+          <div class="form-row" style="grid-template-columns: 1fr">
+            <div class="form-field">
+              <label for="cf-etiquetas">Etiquetas</label>
+              <select id="cf-etiquetas" multiple></select>
+            </div>
+          </div>
+
+          <!-- Fila 6: Activo + Notificaciones (Switches) -->
+          <div class="form-row" style="grid-template-columns: auto auto 1fr; gap: 32px; align-items:center; margin-top: 4px">
+            <div class="form-field" style="flex-direction:row; align-items:center; gap:10px">
+              <input id="cf-activo" type="checkbox">
+              <label for="cf-activo" style="font-size:13px; color:rgba(16,20,38,.87); margin:0">Contacto activo</label>
+            </div>
+            <div class="form-field" style="flex-direction:row; align-items:center; gap:10px">
+              <input id="cf-notif" type="checkbox">
+              <label for="cf-notif" style="font-size:13px; color:rgba(16,20,38,.87); margin:0">Recibir notificaciones</label>
+            </div>
+          </div>
+
+          <!-- Acciones -->
+          <div style="display:flex; gap:12px; margin-top:24px; padding-top:16px; border-top:1px solid rgba(0,0,0,0.08)">
+            <button id="cf-btn-guardar" type="button">Guardar contacto</button>
+            <button id="cf-btn-cancelar" type="button">Cancelar</button>
+            <button id="cf-btn-reset" type="button" style="margin-left:auto">Limpiar</button>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="section-subtitle">Toggles &amp; Selection</div>
+      <div class="demo-card">
+        <div class="demo-row" style="align-items:center;gap:32px;flex-wrap:wrap">
+          <div>
+            <div class="demo-label">Switch</div>
+            <input id="sw-1" type="checkbox" checked>
+            <input id="sw-2" type="checkbox">
+          </div>
+          <div>
+            <div class="demo-label">CheckBox</div>
+            <div id="cb-row" class="demo-row"></div>
+          </div>
+          <div>
+            <div class="demo-label">RadioGroup</div>
+            <div id="rg-1"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ GRID ════════════════════════ -->
+    <section class="section" id="grid">
+      <h2 class="section-title">Grid</h2>
+      <div class="demo-card" style="padding:0;overflow:hidden">
+        <div id="grid-demo"></div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ CHARTS ════════════════════════ -->
+    <section class="section" id="charts">
+      <h2 class="section-title">Charts</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+        <div class="demo-card">
+          <div class="demo-label">Bar Chart — Ventas por trimestre</div>
+          <div id="chart-bar"></div>
+        </div>
+        <div class="demo-card">
+          <div class="demo-label">Line Chart — Tendencia mensual</div>
+          <div id="chart-line"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ DIALOGS ════════════════════════ -->
+    <section class="section" id="dialogs">
+      <h2 class="section-title">Dialogs</h2>
+      <div class="demo-card">
+        <div class="demo-row">
+          <button id="btn-open-dialog" class="k-button k-button-md k-button-solid k-button-solid-primary k-rounded-md">
+            Abrir Dialog
+          </button>
+          <button id="btn-open-window" class="k-button k-button-md k-button-solid k-button-solid-secondary k-rounded-md">
+            Abrir Window
+          </button>
+        </div>
+
+        <!-- Dialog -->
+        <div id="dialog-1" style="display:none">
+          <p>¿Confirmas que deseas proceder con esta acción?</p>
+          <p>Esta operación no se puede deshacer.</p>
+        </div>
+
+        <!-- Window content -->
+        <div id="window-1" style="display:none">
+          <div style="padding:16px">
+            <p>Este es el contenido de un <strong>kendoWindow</strong>.</p>
+            <p>Puedes moverlo, redimensionarlo y cerrarlo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ NOTIFICATIONS ════════════════════════ -->
+    <section class="section" id="notifications">
+      <h2 class="section-title">Notifications</h2>
+      <div class="demo-card">
+        <div class="demo-row">
+          <button id="btn-notif-success" class="k-button k-button-md k-button-solid k-button-solid-success k-rounded-md">
+            Success
+          </button>
+          <button id="btn-notif-warning" class="k-button k-button-md k-button-solid k-button-solid-warning k-rounded-md">
+            Warning
+          </button>
+          <button id="btn-notif-error" class="k-button k-button-md k-button-solid k-button-solid-error k-rounded-md">
+            Error
+          </button>
+          <button id="btn-notif-info" class="k-button k-button-md k-button-solid k-button-solid-info k-rounded-md">
+            Info
+          </button>
+        </div>
+        <span id="notification-widget"></span>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ PAGER ════════════════════════ -->
+    <section class="section" id="pager">
+      <h2 class="section-title">Pager</h2>
+      <div id="pager-demo"></div>
+    </section>
+
+    <!-- ════════════════════════ TABS ════════════════════════ -->
+    <section class="section" id="tabs">
+      <h2 class="section-title">Tabs</h2>
+      <div class="demo-card" style="padding:0;overflow:hidden">
+        <div id="tabstrip-1">
+          <ul>
+            <li class="k-active">Resumen</li>
+            <li>Detalles</li>
+            <li>Configuración</li>
+          </ul>
+          <div>
+            <p style="padding:16px;margin:0">
+              <strong>Resumen del módulo.</strong> Aquí encontrarás las métricas principales y el estado general del componente.
+            </p>
+          </div>
+          <div>
+            <p style="padding:16px;margin:0">
+              <strong>Detalles técnicos.</strong> Información extendida sobre parámetros, configuración avanzada y dependencias.
+            </p>
+          </div>
+          <div>
+            <p style="padding:16px;margin:0">
+              <strong>Configuración.</strong> Opciones de personalización del componente para tu entorno de trabajo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ PROGRESSBAR & LOADER ════════════════════════ -->
+    <section class="section" id="loaders">
+      <h2 class="section-title">ProgressBar &amp; Loader</h2>
+
+      <div class="section-subtitle">ProgressBar</div>
+      <div class="demo-card">
+        <div class="demo-label">Value</div>
+        <div id="pb-value" style="margin-bottom:16px"></div>
+        <div class="demo-label">Percent</div>
+        <div id="pb-percent" style="margin-bottom:16px"></div>
+        <div class="demo-label">Chunk (5 segmentos)</div>
+        <div id="pb-chunk" style="margin-bottom:20px"></div>
+        <div class="demo-label">Theme Colors</div>
+        <div id="pb-colors"></div>
+      </div>
+
+      <div class="section-subtitle">Loader</div>
+      <div class="demo-card">
+        <div class="demo-label">Tipos: pulsing · infinite-spinner · converging-spinner</div>
+        <div id="loader-types-row" class="demo-row" style="align-items:center;gap:48px;padding:16px 0"></div>
+        <div class="demo-label" style="margin-top:16px">Tamaños: sm · md · lg</div>
+        <div id="loader-sizes-row" class="demo-row" style="align-items:center;gap:48px;padding:16px 0"></div>
+        <div class="demo-label" style="margin-top:16px">Theme Colors</div>
+        <div id="loader-colors-row" class="demo-row" style="align-items:center;gap:40px;padding:16px 0"></div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ BADGE & CHIP ════════════════════════ -->
+    <section class="section" id="badges">
+      <h2 class="section-title">Badge &amp; Chip</h2>
+
+      <div class="section-subtitle">Badge — Theme Colors</div>
+      <div class="demo-card">
+        <div id="badge-colors-row" class="demo-row" style="align-items:center;gap:24px"></div>
+      </div>
+
+      <div class="section-subtitle">Badge — Border Radius (rounded)</div>
+      <div class="demo-card">
+        <div class="demo-label">none · sm · md · lg · full</div>
+        <div id="badge-shapes-row" class="demo-row" style="align-items:center;gap:24px"></div>
+      </div>
+
+      <div class="section-subtitle">Badge — Sobre elementos</div>
+      <div class="demo-card">
+        <div id="badge-on-elements" class="demo-row" style="align-items:center;gap:32px"></div>
+      </div>
+
+      <div class="section-subtitle">Chip — Solid</div>
+      <div class="demo-card">
+        <div class="demo-label">base · info · success · warning · error</div>
+        <div id="chip-solid-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Chip — Outline</div>
+      <div class="demo-card">
+        <div class="demo-label">base · info · success · warning · error</div>
+        <div id="chip-outline-row" class="demo-row"></div>
+      </div>
+
+      <div class="section-subtitle">Chip — Con ícono y removable</div>
+      <div class="demo-card">
+        <div id="chip-icons-row" class="demo-row"></div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ TOOLTIP ════════════════════════ -->
+    <section class="section" id="tooltips">
+      <h2 class="section-title">Tooltip</h2>
+
+      <div class="section-subtitle">Posiciones</div>
+      <div class="demo-card">
+        <div class="demo-label">top · bottom · left · right</div>
+        <div id="tooltip-positions" class="demo-row" style="padding:32px 0;gap:16px"></div>
+      </div>
+
+      <div class="section-subtitle">Sobre distintos elementos</div>
+      <div class="demo-card">
+        <div id="tooltip-elements" class="demo-row" style="padding:16px 0;align-items:center;gap:16px"></div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ AVATAR ════════════════════════ -->
+    <section class="section" id="avatars">
+      <h2 class="section-title">Avatar</h2>
+
+      <div class="section-subtitle">Tipos</div>
+      <div class="demo-card">
+        <div class="demo-label">text · icon · image</div>
+        <div id="avatar-types-row" class="demo-row" style="align-items:center;gap:24px;padding:8px 0"></div>
+      </div>
+
+      <div class="section-subtitle">Tamaños</div>
+      <div class="demo-card">
+        <div class="demo-label">sm · md · lg</div>
+        <div id="avatar-sizes-row" class="demo-row" style="align-items:center;gap:24px;padding:8px 0"></div>
+      </div>
+
+      <div class="section-subtitle">Theme Colors</div>
+      <div class="demo-card">
+        <div id="avatar-colors-row" class="demo-row" style="align-items:center;gap:16px;flex-wrap:wrap;padding:8px 0"></div>
+      </div>
+
+      <div class="section-subtitle">Shapes</div>
+      <div class="demo-card">
+        <div class="demo-label">circle · square · rounded</div>
+        <div id="avatar-shapes-row" class="demo-row" style="align-items:flex-start;gap:24px;padding:8px 0"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- jQuery 4.0.0 -->
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js" crossorigin="anonymous"></script>
+  <!-- Kendo UI for jQuery 2026.1.415 -->
+  <script src="https://kendo.cdn.telerik.com/2026.1.415/js/kendo.all.min.js"></script>
+
+  <script src="demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+// =============================================================================
+// Estela Brand Tokens — alineado con DS oficial React (@dann-pixel/estela-theme)
+// =============================================================================
+// Fuente de verdad: https://github.com/dann-pixel/DS-Estela-react
+//                  src/theme/index.ts — createAppTheme()
+//
+// Proceso de aplicación:
+//   1. dist/all.css compila el tema Material de Kendo con sus vars default
+//   2. Este bloque :root aparece AL FINAL del CSS → sobreescribe por cascada
+//
+// Para agregar un token:
+//   1. Busca la CSS var en dist/all.css buscando --kendo-color-
+//   2. Agrégala aquí bajo la sección correspondiente
+//   3. npm run build
+// =============================================================================
+
+:root {
+
+  // ---------------------------------------------------------------------------
+  // Primary — Estela Cyan
+  // Fuente: palette.primary.main = #00B5CC / light = #5FEFE8 / dark = #006A92
+  // NOTA: on-primary = #ffffff sigue el React DS (decisión de marca, el
+  //       contraste 2.5:1 no pasa WCAG AA para texto normal, pero sí para
+  //       iconos y texto grande en botones).
+  // ---------------------------------------------------------------------------
+  --kendo-color-primary-subtle:        #E0F6F9;   // tint 88% de #00B5CC
+  --kendo-color-primary-subtle-hover:  #CCF0F5;   // tint 80%
+  --kendo-color-primary-subtle-active: #B2E9F0;   // tint 70%
+  --kendo-color-primary:               #00B5CC;   // main
+  --kendo-color-primary-hover:         #00A3B8;   // darken ~10%
+  --kendo-color-primary-active:        #006A92;   // dark (MUI)
+  --kendo-color-primary-emphasis:      #5FEFE8;   // light (MUI) — accent suave
+  --kendo-color-primary-on-subtle:     #005566;   // texto oscuro sobre subtle
+  --kendo-color-on-primary:            #ffffff;   // texto sobre primary (marca)
+  --kendo-color-primary-on-surface:    #006A92;   // primary dark — contraste 5.98:1 sobre blanco
+
+  // ---------------------------------------------------------------------------
+  // Secondary — Estela Blue-Purple
+  // Fuente: palette.secondary.main = #4255FF / light = #9CB6FF / dark = #2528AE
+  // ---------------------------------------------------------------------------
+  --kendo-color-secondary-subtle:        #ECEEFF;   // tint 88%
+  --kendo-color-secondary-subtle-hover:  #D9DDFF;   // tint 78%
+  --kendo-color-secondary-subtle-active: #C5CAFF;   // tint 68%
+  --kendo-color-secondary:               #4255FF;   // main
+  --kendo-color-secondary-hover:         #3344EE;   // darken ~8%
+  --kendo-color-secondary-active:        #2528AE;   // dark (MUI)
+  --kendo-color-secondary-emphasis:      #9CB6FF;   // light (MUI)
+  --kendo-color-secondary-on-subtle:     #1A2499;   // texto oscuro sobre subtle
+  --kendo-color-on-secondary:            #ffffff;   // texto sobre secondary — contraste 5.2:1 ✓
+  --kendo-color-secondary-on-surface:    #4255FF;
+
+  // ---------------------------------------------------------------------------
+  // Tertiary — Estela Teal (complementario, no definido en React DS)
+  // Paleta complementaria para componentes que requieren un tercer color de acento.
+  // ---------------------------------------------------------------------------
+  --kendo-color-tertiary-subtle:        #B2DFDB;
+  --kendo-color-tertiary-subtle-hover:  #9ED1CC;
+  --kendo-color-tertiary-subtle-active: #85C1BB;
+  --kendo-color-tertiary:               #00796B;
+  --kendo-color-tertiary-hover:         #006157;
+  --kendo-color-tertiary-active:        #004D43;
+  --kendo-color-tertiary-emphasis:      #4DB6AC;
+  --kendo-color-tertiary-on-subtle:     #004D43;
+  --kendo-color-on-tertiary:            #ffffff;
+  --kendo-color-tertiary-on-surface:    #00796B;
+
+  // ---------------------------------------------------------------------------
+  // Semantic — Success
+  // Fuente: palette.success.main = #22c55e / light = #86efac / dark = #15803d
+  // ---------------------------------------------------------------------------
+  --kendo-color-success:               #22c55e;
+  --kendo-color-success-hover:         #16a34a;
+  --kendo-color-success-active:        #15803d;
+  --kendo-color-success-subtle:        #bbf7d0;
+  --kendo-color-on-success:            #ffffff;
+
+  // ---------------------------------------------------------------------------
+  // Semantic — Warning
+  // Fuente: palette.warning.main = #f97316 / light = #fdba74 / dark = #c2410c
+  // ---------------------------------------------------------------------------
+  --kendo-color-warning:               #f97316;
+  --kendo-color-warning-hover:         #ea6c0e;
+  --kendo-color-warning-active:        #c2410c;
+  --kendo-color-warning-subtle:        #fed7aa;
+  --kendo-color-on-warning:            #ffffff;
+
+  // ---------------------------------------------------------------------------
+  // Semantic — Error
+  // Fuente: palette.error.main = #ef4444 / light = #fca5a5 / dark = #b91c1c
+  // ---------------------------------------------------------------------------
+  --kendo-color-error:                 #ef4444;
+  --kendo-color-error-hover:           #dc2626;
+  --kendo-color-error-active:          #b91c1c;
+  --kendo-color-error-subtle:          #fecaca;
+  --kendo-color-on-error:              #ffffff;
+
+  // ---------------------------------------------------------------------------
+  // Semantic — Info
+  // Fuente: palette.info.main = #0ea5e9 / light = #7dd3fc / dark = #0369a1
+  // ---------------------------------------------------------------------------
+  --kendo-color-info:                  #0ea5e9;
+  --kendo-color-info-hover:            #0284c7;
+  --kendo-color-info-active:           #0369a1;
+  --kendo-color-info-subtle:           #bae6fd;
+  --kendo-color-on-info:               #ffffff;
+
+  // ---------------------------------------------------------------------------
+  // Dark — BlueGrey[900] (color custom del React DS para botones "oscuros")
+  // Fuente: palette.dark.main = blueGrey[900] = #263238
+  // ---------------------------------------------------------------------------
+  --kendo-color-dark:                  #263238;   // blueGrey[900]
+  --kendo-color-dark-hover:            #37474F;   // blueGrey[800]
+  --kendo-color-dark-active:           #455A64;   // blueGrey[700]
+  --kendo-color-dark-subtle:           #ECEFF1;   // blueGrey[50]
+  --kendo-color-on-dark:               #ffffff;
+
+  // ---------------------------------------------------------------------------
+  // Light — BlueGrey[50] (superficie clara neutral)
+  // ---------------------------------------------------------------------------
+  --kendo-color-light:                 #ECEFF1;   // blueGrey[50]
+  --kendo-color-light-hover:           #CFD8DC;   // blueGrey[100]
+  --kendo-color-light-active:          #B0BEC5;   // blueGrey[200]
+  --kendo-color-on-light:              #263238;   // blueGrey[900] — texto oscuro ✓
+
+  // ---------------------------------------------------------------------------
+  // Inverse — navy oscuro del texto primario
+  // ---------------------------------------------------------------------------
+  --kendo-color-inverse:               #101426;
+  --kendo-color-inverse-hover:         #1D2137;
+  --kendo-color-inverse-active:        #2A2E48;
+  --kendo-color-on-inverse:            #ffffff;
+
+  // ---------------------------------------------------------------------------
+  // Base — elementos neutros interactivos (blueGrey)
+  // Fuente: palette.grey = blueGrey de MUI
+  // ---------------------------------------------------------------------------
+  --kendo-color-base-subtle:           #F1F5F8;
+  --kendo-color-base-subtle-hover:     #E9EFF4;
+  --kendo-color-base-subtle-active:    #DDE6ED;
+  --kendo-color-base:                  #ECEFF1;   // blueGrey[50]
+  --kendo-color-base-hover:            #CFD8DC;   // blueGrey[100]
+  --kendo-color-base-active:           #B0BEC5;   // blueGrey[200]
+  --kendo-color-base-emphasis:         #607D8B;   // blueGrey[500]
+  --kendo-color-base-on-subtle:        #37474F;   // blueGrey[800]
+  --kendo-color-on-base:               #263238;   // blueGrey[900]
+  --kendo-color-base-on-surface:       #607D8B;   // blueGrey[500]
+
+  // ---------------------------------------------------------------------------
+  // Surface & Background
+  // app-surface = fondo de página (blanco puro)
+  // surface     = fondo de componentes interactivos (inputs, cards, popups)
+  //               → NO puede ser #ffffff: los inputs solid usan k-color(surface)
+  //               como background; si iguala al fondo de la tarjeta quedan invisibles.
+  //               Usamos blueGrey[50] del DS (#ECEFF1) desaturado a #F4F6F8.
+  // ---------------------------------------------------------------------------
+  --kendo-color-app-surface:           #ffffff;
+  --kendo-color-on-app-surface:        rgba(16, 20, 38, 0.87);   // text.primary
+  --kendo-color-surface:               #F4F6F8;   // blueGrey muy suave — fondo visible para inputs
+  --kendo-color-surface-alt:           #ECEFF1;   // blueGrey[50] — zebra rows, grid headers
+
+  // ---------------------------------------------------------------------------
+  // Text & Border
+  // Fuente: text.secondary = #10142699 / divider = #0000001f
+  // ---------------------------------------------------------------------------
+  --kendo-color-subtle:                rgba(16, 20, 38, 0.60);   // text.secondary
+  --kendo-color-border:                rgba(0, 0, 0, 0.12);      // divider = #0000001f
+  --kendo-color-border-alt:            rgba(0, 0, 0, 0.15);
+
+  // ---------------------------------------------------------------------------
+  // Typography — Instrument Sans (body) · Outfit se aplica en index.scss
+  // Fuente: typography.fontFamily = 'Instrument Sans'
+  //         typography.h1-h6.fontFamily = 'Outfit'
+  // ---------------------------------------------------------------------------
+  --kendo-font-family:                 'Instrument Sans', sans-serif;
+  --kendo-font-family-sans-serif:      'Instrument Sans', sans-serif;
+  --kendo-font-size:                   0.875rem;   // 14px
+  --kendo-font-size-sm:                0.75rem;    // 12px
+  --kendo-font-size-md:                0.875rem;   // 14px
+  --kendo-font-size-lg:                1rem;       // 16px
+  --kendo-font-size-xl:                1.125rem;   // 18px
+
+  // ---------------------------------------------------------------------------
+  // Border radius — base 4px (MUI shape.borderRadius = 4)
+  // ---------------------------------------------------------------------------
+  --kendo-border-radius-none:          0px;
+  --kendo-border-radius-sm:            2px;
+  --kendo-border-radius-md:            4px;
+  --kendo-border-radius-lg:            6px;
+  --kendo-border-radius-xl:            8px;
+  --kendo-border-radius-full:          9999px;
+
+  // ---------------------------------------------------------------------------
+  // Elevation — superficies planas (React DS: elevation ≤ 2 → sin sombra)
+  // Botones, chips y cards estáticas usan elevation-1.
+  // Overlays flotantes (Dialog, Popup, Tooltip) usan elevation-2/3 → sin cambio.
+  // ---------------------------------------------------------------------------
+  --kendo-elevation-1:                 none;
+
+}

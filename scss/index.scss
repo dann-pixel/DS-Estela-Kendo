@@ -1,0 +1,46 @@
+// =============================================================================
+// @estela/kendo-theme — Entry Point
+// =============================================================================
+// 1. Kendo Material theme (base)
+// 2. Estela brand token overrides (CSS custom properties)
+// 3. Estela brand patches — solo para propiedades sin CSS variable en Kendo v13
+// =============================================================================
+
+// 1. Kendo Material — all components
+@use '@progress/kendo-theme-material/scss/all';
+
+// 2. Estela brand tokens (CSS variable overrides applied after the theme)
+//    Elevation, colores, tipografía, border-radius → todos en _variables.scss
+@use 'variables';
+
+// 3. Brand patches
+// ─────────────────────────────────────────────────────────────────────────────
+// NOTA: Solo se incluyen reglas que NO tienen CSS variable equivalente en
+// Kendo v13. Todo lo que admite variable está en _variables.scss.
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Headings — Outfit (h1–h6), alineado con el React DS.
+// --kendo-font-family solo aplica a componentes Kendo internamente;
+// no existe variable para overridear etiquetas HTML nativas.
+h1, h2, h3, h4, h5, h6,
+.k-h1, .k-h2, .k-h3, .k-h4, .k-h5, .k-h6 {
+  font-family: 'Outfit', sans-serif;
+}
+
+h1, .k-h1,
+h2, .k-h2 {
+  font-weight: 500;
+}
+
+// Grid — fila densa.
+// No existe --kendo-grid-cell-padding-y ni variable pública equivalente en v13.
+.k-grid td {
+  padding-block: 6px;
+}
+
+// Chip — alineación vertical con texto inline.
+// No existe variable Kendo para vertical-align en chips.
+.k-chip {
+  vertical-align: middle;
+}
+
