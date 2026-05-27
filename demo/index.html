@@ -249,6 +249,72 @@
       border: 1px solid rgba(0,0,0,0.12);
       box-shadow: none;
     }
+
+    /* ── Docs links ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-header .section-title {
+      margin: 0;
+      flex: 1;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .section-header::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0; right: 0;
+    }
+
+    .section-header-wrap {
+      border-bottom: 2px solid #4255FF;
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-header-wrap .section-title {
+      margin: 0;
+      flex: 1;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .docs-links {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+
+    .docs-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 3px 9px;
+      border-radius: 4px;
+      border: 1px solid rgba(66, 85, 255, 0.35);
+      color: #4255FF;
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      font-family: 'Instrument Sans', sans-serif;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .docs-link:hover {
+      background: rgba(66, 85, 255, 0.08);
+      border-color: #4255FF;
+    }
   </style>
 </head>
 <body>
@@ -282,7 +348,10 @@
 
     <!-- ════════════════════════ COLORS ════════════════════════ -->
     <section class="section" id="colors">
-      <h2 class="section-title">Colors</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Colors</h2>
+        <a class="docs-link" href="https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/customization" target="_blank" rel="noopener">Theme Tokens ↗</a>
+      </div>
 
       <div class="section-subtitle">Primary — Estela Blue</div>
       <div class="color-grid" id="primary-swatches"></div>
@@ -302,7 +371,10 @@
 
     <!-- ════════════════════════ TYPOGRAPHY ════════════════════════ -->
     <section class="section" id="typography">
-      <h2 class="section-title">Typography</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Typography</h2>
+        <a class="docs-link" href="https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/customization#typography" target="_blank" rel="noopener">Typography Tokens ↗</a>
+      </div>
       <div class="demo-card">
         <div class="type-scale-row">
           <span class="type-scale-meta">h1 · 2rem · 700</span>
@@ -349,7 +421,15 @@
 
     <!-- ════════════════════════ BUTTONS ════════════════════════ -->
     <section class="section" id="buttons">
-      <h2 class="section-title">Buttons</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Buttons</h2>
+        <div class="docs-links">
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/button/overview" target="_blank" rel="noopener">Button ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/splitbutton/overview" target="_blank" rel="noopener">SplitButton ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/dropdownbutton/overview" target="_blank" rel="noopener">DropDownButton ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/buttongroup/overview" target="_blank" rel="noopener">ButtonGroup ↗</a>
+        </div>
+      </div>
 
       <div class="section-subtitle">Fill Modes (con Primary)</div>
       <div class="demo-card">
@@ -430,7 +510,19 @@
 
     <!-- ════════════════════════ FORMS ════════════════════════ -->
     <section class="section" id="forms">
-      <h2 class="section-title">Forms</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Forms</h2>
+        <div class="docs-links">
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/textbox/overview" target="_blank" rel="noopener">TextBox ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/numerictextbox/overview" target="_blank" rel="noopener">NumericTextBox ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/datepicker/overview" target="_blank" rel="noopener">DatePicker ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/dropdownlist/overview" target="_blank" rel="noopener">DropDownList ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/multiselect/overview" target="_blank" rel="noopener">MultiSelect ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/switch/overview" target="_blank" rel="noopener">Switch ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/checkbox/overview" target="_blank" rel="noopener">CheckBox ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/radiogroup/overview" target="_blank" rel="noopener">RadioGroup ↗</a>
+        </div>
+      </div>
 
       <div class="section-subtitle">Inputs</div>
       <div class="demo-card">
@@ -589,7 +681,10 @@
 
     <!-- ════════════════════════ GRID ════════════════════════ -->
     <section class="section" id="grid">
-      <h2 class="section-title">Grid</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Grid</h2>
+        <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/grid/overview" target="_blank" rel="noopener">Grid ↗</a>
+      </div>
       <div class="demo-card" style="padding:0;overflow:hidden">
         <div id="grid-demo"></div>
       </div>
@@ -597,7 +692,10 @@
 
     <!-- ════════════════════════ CHARTS ════════════════════════ -->
     <section class="section" id="charts">
-      <h2 class="section-title">Charts</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Charts</h2>
+        <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/charts/overview" target="_blank" rel="noopener">Charts ↗</a>
+      </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
         <div class="demo-card">
           <div class="demo-label">Bar Chart — Ventas por trimestre</div>
@@ -612,7 +710,13 @@
 
     <!-- ════════════════════════ DIALOGS ════════════════════════ -->
     <section class="section" id="dialogs">
-      <h2 class="section-title">Dialogs</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Dialogs</h2>
+        <div class="docs-links">
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/dialog/overview" target="_blank" rel="noopener">Dialog ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/window/overview" target="_blank" rel="noopener">Window ↗</a>
+        </div>
+      </div>
       <div class="demo-card">
         <div class="demo-row">
           <button id="btn-open-dialog" class="k-button k-button-md k-button-solid k-button-solid-primary k-rounded-md">
@@ -641,7 +745,10 @@
 
     <!-- ════════════════════════ NOTIFICATIONS ════════════════════════ -->
     <section class="section" id="notifications">
-      <h2 class="section-title">Notifications</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Notifications</h2>
+        <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/notification/overview" target="_blank" rel="noopener">Notification ↗</a>
+      </div>
       <div class="demo-card">
         <div class="demo-row">
           <button id="btn-notif-success" class="k-button k-button-md k-button-solid k-button-solid-success k-rounded-md">
@@ -663,13 +770,19 @@
 
     <!-- ════════════════════════ PAGER ════════════════════════ -->
     <section class="section" id="pager">
-      <h2 class="section-title">Pager</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Pager</h2>
+        <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/pager/overview" target="_blank" rel="noopener">Pager ↗</a>
+      </div>
       <div id="pager-demo"></div>
     </section>
 
     <!-- ════════════════════════ TABS ════════════════════════ -->
     <section class="section" id="tabs">
-      <h2 class="section-title">Tabs</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Tabs</h2>
+        <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/tabstrip/overview" target="_blank" rel="noopener">TabStrip ↗</a>
+      </div>
       <div class="demo-card" style="padding:0;overflow:hidden">
         <div id="tabstrip-1">
           <ul>
@@ -698,7 +811,13 @@
 
     <!-- ════════════════════════ PROGRESSBAR & LOADER ════════════════════════ -->
     <section class="section" id="loaders">
-      <h2 class="section-title">ProgressBar &amp; Loader</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">ProgressBar &amp; Loader</h2>
+        <div class="docs-links">
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/progressbar/overview" target="_blank" rel="noopener">ProgressBar ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/loader/overview" target="_blank" rel="noopener">Loader ↗</a>
+        </div>
+      </div>
 
       <div class="section-subtitle">ProgressBar</div>
       <div class="demo-card">
@@ -725,7 +844,13 @@
 
     <!-- ════════════════════════ BADGE & CHIP ════════════════════════ -->
     <section class="section" id="badges">
-      <h2 class="section-title">Badge &amp; Chip</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Badge &amp; Chip</h2>
+        <div class="docs-links">
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/badge/overview" target="_blank" rel="noopener">Badge ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/chip/overview" target="_blank" rel="noopener">Chip ↗</a>
+        </div>
+      </div>
 
       <div class="section-subtitle">Badge — Theme Colors</div>
       <div class="demo-card">
@@ -763,7 +888,10 @@
 
     <!-- ════════════════════════ TOOLTIP ════════════════════════ -->
     <section class="section" id="tooltips">
-      <h2 class="section-title">Tooltip</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Tooltip</h2>
+        <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/tooltip/overview" target="_blank" rel="noopener">Tooltip ↗</a>
+      </div>
 
       <div class="section-subtitle">Posiciones</div>
       <div class="demo-card">
@@ -779,7 +907,10 @@
 
     <!-- ════════════════════════ AVATAR ════════════════════════ -->
     <section class="section" id="avatars">
-      <h2 class="section-title">Avatar</h2>
+      <div class="section-header-wrap">
+        <h2 class="section-title">Avatar</h2>
+        <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/avatar/overview" target="_blank" rel="noopener">Avatar ↗</a>
+      </div>
 
       <div class="section-subtitle">Tipos</div>
       <div class="demo-card">
