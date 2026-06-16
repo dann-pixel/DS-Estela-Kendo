@@ -3,21 +3,106 @@
 
 $(function () {
 
-  // ── Sidebar active state on scroll ──────────────────────────────────────
-  var sections = document.querySelectorAll('.section');
-  var navLinks = document.querySelectorAll('#sidebar-nav a');
+  // ════════════════════════════════════════════════════════════════════════
+  // APPBAR
+  // ════════════════════════════════════════════════════════════════════════
 
-  function setActiveLink() {
+  // AppBar — templates simples sin SVG inline (Kendo carga los iconos desde el CSS)
+  $('#topbar').kendoAppBar({
+    themeColor: 'inherit',
+    items: [
+      { type: 'contentItem', template: '<button id="menu-toggle" class="k-button k-button-md k-button-flat k-button-flat-base k-icon-button" title="Menu"><span class="k-svg-icon k-svg-i-menu"></span></button>' },
+      { type: 'separator', template: '<span class="k-appbar-separator"></span>' },
+      { type: 'contentItem', template: '<span class="app-title">@estela/kendo-theme <small class="app-version">Design System v1.0</small></span>' },
+      { type: 'spacer' },
+      { type: 'contentItem', template: '<span class="k-badge k-badge-solid k-badge-primary k-badge-md k-rounded-md">v1.0</span>' }
+    ]
+  });
+
+  // ════════════════════════════════════════════════════════════════════════
+  // DRAWER
+  // Kendo Drawer requiere la opción `template` (HTML string) para renderizar
+  // el panel. La opción `items` NO genera HTML en esta versión de Kendo.
+  // ════════════════════════════════════════════════════════════════════════
+
+  var navItems = [
+    { text: 'Colors',               icon: 'palette',     id: 'colors',      selected: true },
+    { text: 'Typography',           icon: 'font-family', id: 'typography'                  },
+    { separator: true },
+    { text: 'Buttons',              icon: 'button',      id: 'buttons'                     },
+    { text: 'Forms',                icon: 'form',        id: 'forms'                       },
+    { text: 'Grid',                 icon: 'grid',        id: 'grid'                        },
+    { text: 'Charts',               icon: 'chart-line',  id: 'charts'                      },
+    { separator: true },
+    { text: 'Dialogs',              icon: 'window',      id: 'dialogs'                     },
+    { text: 'Notifications',        icon: 'bell',        id: 'notifications'               },
+    { text: 'Pager',                icon: 'pager',       id: 'pager'                       },
+    { text: 'Tabs',                 icon: 'tab',         id: 'tabs'                        },
+    { separator: true },
+    { text: 'ProgressBar & Loader', icon: 'gear',        id: 'loaders'                     },
+    { text: 'Badge & Chip',         icon: 'tag',         id: 'badges'                      },
+    { text: 'Tooltip',              icon: 'comment',     id: 'tooltips'                    },
+    { text: 'Avatar',               icon: 'user',        id: 'avatars'                     }
+  ];
+
+  function buildDrawerTemplate(items) {
+    var html = '<ul>';
+    items.forEach(function (item) {
+      if (item.separator) {
+        html += '<li data-role="drawer-separator"></li>';
+      } else {
+        html += '<li data-role="drawer-item"' +
+          ' data-section-id="' + item.id + '"' +
+          (item.selected ? ' class="k-selected"' : '') + '>' +
+          '<span class="k-svg-icon k-svg-i-' + item.icon + '"></span>' +
+          '<span class="k-item-text">' + item.text + '</span>' +
+          '</li>';
+      }
+    });
+    html += '</ul>';
+    return html;
+  }
+
+  var drawer = $('#side-drawer').kendoDrawer({
+    mode: 'push',
+    position: 'left',
+    width: 220,
+    template: buildDrawerTemplate(navItems)
+  }).data('kendoDrawer');
+
+  drawer.show();
+
+  // Click en items del drawer — scroll a la sección correspondiente
+  $('#side-drawer').on('click', '[data-role="drawer-item"]', function () {
+    var sectionId = $(this).data('section-id');
+    var el = document.getElementById(sectionId);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    // Actualizar estado activo
+    $('#side-drawer [data-role="drawer-item"]').removeClass('k-selected');
+    $(this).addClass('k-selected');
+  });
+
+  // Toggle button (visible solo en mobile)
+  $(document).on('click', '#menu-toggle', function () {
+    drawer.toggle();
+  });
+
+  // Actualizar item activo según sección visible al hacer scroll
+  var sections = document.querySelectorAll('.section');
+
+  function updateDrawerActive() {
     var currentId = '';
     sections.forEach(function (s) {
-      if (s.getBoundingClientRect().top <= 80) currentId = s.id;
+      if (s.getBoundingClientRect().top <= 100) currentId = s.id;
     });
-    navLinks.forEach(function (a) {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + currentId);
+    if (!currentId) return;
+    $('#side-drawer [data-role="drawer-item"]').each(function () {
+      $(this).toggleClass('k-selected', $(this).data('section-id') === currentId);
     });
   }
-  document.getElementById('main').addEventListener('scroll', setActiveLink);
-  setActiveLink();
+
+  document.getElementById('drawer-content').addEventListener('scroll', updateDrawerActive);
+  updateDrawerActive();
 
   // ── Helpers ─────────────────────────────────────────────────────────────
   function cssVar(name) {
