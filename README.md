@@ -10,35 +10,56 @@ Tema oficial de Estela para **Kendo UI for jQuery**, basado en el tema Material 
 | @progress/kendo-theme-material | ^13.1.1 |
 | Sass (dart-sass) | ^1.87.0 |
 
+---
+
 ## Instalación
 
-### Desde GitHub
+### Opción A — Desde GitHub (recomendado)
 
 ```bash
 npm install git+https://github.com/dann-pixel/DS-Estela-Kendo.git
 ```
 
-### Desde ruta local (desarrollo)
+O una versión específica:
 
 ```bash
-npm install ../DS-Estela-kendo
+npm install git+https://github.com/dann-pixel/DS-Estela-Kendo.git#v1.0.0
 ```
+
+### Opción B — Manual (sin npm)
+
+Si el proyecto no usa npm, alcanza con copiar el archivo compilado:
+
+1. Descargá `dist/all.css` desde el repositorio
+2. Pegalo en tu proyecto, por ejemplo en `assets/css/estela-kendo.css`
+3. Cargalo en el `<head>` de tu HTML
+
+---
 
 ## Uso
 
-El paquete expone `dist/all.css` — incluye el tema Material base de Kendo **y** los overrides de marca de Estela compilados en un solo archivo. No es necesario instalar `@progress/kendo-theme-material` por separado.
+El paquete expone `dist/all.css` — un único archivo que incluye el tema Material base de Kendo **y** los overrides de marca Estela compilados juntos. No es necesario instalar ni cargar `@progress/kendo-theme-material` por separado.
 
 ### HTML
 
 ```html
-<!-- 1. jQuery -->
-<script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+<head>
+  <!-- Fuentes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- 2. Kendo UI for jQuery JS -->
-<script src="https://kendo.cdn.telerik.com/2026.1.415/js/kendo.all.min.js"></script>
+  <!-- Tema Estela (incluye el tema Material base + overrides de marca) -->
+  <link rel="stylesheet" href="node_modules/@estela/kendo-theme/dist/all.css">
+  <!-- o si lo copiaste manualmente: -->
+  <!-- <link rel="stylesheet" href="assets/css/estela-kendo.css"> -->
+</head>
 
-<!-- 3. Tema Estela -->
-<link rel="stylesheet" href="node_modules/@estela/kendo-theme/dist/all.css">
+<body>
+  <!-- jQuery y Kendo JS van al final del body -->
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/@progress/kendo-ui/js/kendo.all.min.js"></script>
+</body>
 ```
 
 ### Bundler (Webpack / Vite)
@@ -47,15 +68,7 @@ El paquete expone `dist/all.css` — incluye el tema Material base de Kendo **y*
 import '@estela/kendo-theme/dist/all.css';
 ```
 
-### Fuentes (Google Fonts)
-
-El tema usa `Instrument Sans` para body y `Outfit` para headings. Agrega esto en el `<head>`:
-
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-```
+---
 
 ## Brand tokens principales
 
@@ -70,6 +83,8 @@ El tema usa `Instrument Sans` para body y `Outfit` para headings. Agrega esto en
 | Elevation estática | `none` | Botones y cards sin sombra |
 | Surface | `#F4F6F8` | Fondo de inputs y componentes interactivos |
 
+---
+
 ## Personalización adicional
 
 Todos los tokens se pueden sobreescribir en el proyecto consumidor añadiendo un bloque `:root` **después** de cargar `dist/all.css`:
@@ -83,6 +98,8 @@ Todos los tokens se pueden sobreescribir en el proyecto consumidor añadiendo un
 ```
 
 Ver la lista completa de variables disponibles en la [documentación oficial de Kendo](https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/customization).
+
+---
 
 ## Desarrollo
 
@@ -131,6 +148,8 @@ La demo muestra todos los componentes Kendo con el tema aplicado: paleta de colo
 }
 ```
 
+---
+
 ## Estructura del proyecto
 
 ```
@@ -148,6 +167,8 @@ DS-Estela-Kendo/
 └── CLAUDE.md             — Instrucciones para asistentes IA
 ```
 
+---
+
 ## Cómo funciona internamente
 
 Kendo v13 usa CSS custom properties como mecanismo oficial de personalización. El build process:
@@ -158,6 +179,33 @@ Kendo v13 usa CSS custom properties como mecanismo oficial de personalización. 
 
 El resultado es un único `dist/all.css` autónomo que los proyectos consumidores importan sin necesidad de tener Sass instalado.
 
+---
+
+## FAQ
+
+**¿Necesito instalar `@progress/kendo-theme-material` en mi proyecto?**
+No. El tema Material ya está compilado dentro de `dist/all.css`. Cargar ese archivo es suficiente.
+
+**¿Puedo usarlo sin npm?**
+Sí. Copiá el archivo `dist/all.css` a tu proyecto y referencíalo con un `<link>` en el HTML. No necesitás instalar nada.
+
+**¿Qué pasa si actualizo el tema manualmente (sin npm)?**
+Tenés que volver a copiar `dist/all.css` a mano cada vez que haya una nueva versión. Con npm alcanza con `npm update`.
+
+**¿Necesito cargar las fuentes de Google Fonts?**
+Sí. El CSS referencia `Instrument Sans` y `Outfit` pero no las embebe. Si no las cargás, el browser usa la fuente de fallback del sistema.
+
+**¿El tema funciona con cualquier versión de Kendo?**
+No. `dist/all.css` está compilado contra Kendo v13 (2026.x). Si tu proyecto usa una versión anterior, revisá la tabla de compatibilidad abajo.
+
+**¿Puedo sobreescribir los colores de Estela en mi proyecto?**
+Sí. Agregá un bloque `:root` con las CSS variables de Kendo **después** de cargar `dist/all.css` y tus valores ganarán por cascada.
+
+**¿Puedo usar el tema con Kendo para React o Angular?**
+Este paquete está pensado para Kendo UI for jQuery. Para React existe `@progress/kendo-theme-material` con soporte oficial de Telerik; los tokens de Estela habría que portarlos a ese stack.
+
+---
+
 ## Compatibilidad
 
 | Kendo UI for jQuery | Este paquete |
@@ -165,6 +213,8 @@ El resultado es un único `dist/all.css` autónomo que los proyectos consumidore
 | 2026.x | v1.x ✓ |
 | 2025.x | Requiere downgrade a theme v12 |
 | 2024.x | Requiere downgrade a theme v10–v11 |
+
+---
 
 ## Licencia
 
