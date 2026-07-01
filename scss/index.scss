@@ -27,9 +27,9 @@ h1, h2, h3, h4, h5, h6,
   font-family: 'Outfit', sans-serif;
 }
 
-h1, .k-h1,
-h2, .k-h2 {
-  font-weight: 500;
+h1, h2, h3, h4, h5, h6,
+.k-h1, .k-h2, .k-h3, .k-h4, .k-h5, .k-h6 {
+  font-weight: 400;
 }
 
 // Grid — fila densa.

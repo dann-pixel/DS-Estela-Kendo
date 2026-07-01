@@ -5,7 +5,8 @@
       "name": "serve",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "serve"],
-      "port": 3000
+      "port": 3000,
+      "autoPort": true
     },
     {
       "name": "watch",
@@ -17,7 +18,8 @@
       "name": "dev (watch + serve)",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "port": 3000
+      "port": 3000,
+      "autoPort": true
     }
   ]
 }
