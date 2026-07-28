@@ -371,6 +371,46 @@
       background: rgba(66, 85, 255, 0.08);
       border-color: #4255FF;
     }
+
+    /* ── Changelog ── */
+    #changelog-content h3.changelog-heading {
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #006A92;
+      margin: 24px 0 8px;
+    }
+
+    #changelog-content h3.changelog-heading:first-child {
+      margin-top: 0;
+    }
+
+    #changelog-content p {
+      margin: 0 0 12px;
+      line-height: 1.5;
+    }
+
+    #changelog-content ul.changelog-list {
+      margin: 0 0 16px;
+      padding-left: 20px;
+    }
+
+    #changelog-content ul.changelog-list li {
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    #changelog-content code {
+      font-family: monospace;
+      background: #f0f0f0;
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+
+    #changelog-content a {
+      color: #4255FF;
+    }
   </style>
 </head>
 <body>
@@ -1079,6 +1119,19 @@
       <div class="demo-card">
         <div class="demo-label">circle · square · rounded</div>
         <div id="avatar-shapes-row" class="demo-row" style="align-items:flex-start;gap:24px;padding:8px 0"></div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ CHANGELOG ════════════════════════ -->
+    <section class="section" id="changelog">
+      <div class="section-header-wrap">
+        <h2 class="section-title">Changelog</h2>
+        <a class="docs-link" href="https://keepachangelog.com/es-ES/1.0.0/" target="_blank" rel="noopener">Keep a Changelog ↗</a>
+      </div>
+      <div class="demo-card">
+        <div id="changelog-content">
+          <p class="demo-label">Cargando CHANGELOG.md…</p>
+        </div>
       </div>
     </section>
 

@@ -189,14 +189,20 @@
   --kendo-font-size-xl:                1.125rem;   // 18px
 
   // ---------------------------------------------------------------------------
-  // Border radius — base 4px (MUI shape.borderRadius = 4)
+  // Border radius — 4px en todo (MUI shape.borderRadius = 4), sin escala.
+  // Excepciones: -none (esquinas rectas) y -full (pills/círculos: chip, avatar,
+  // badge y button en modo rounded-full) no son "radios", son formas aparte.
+  // -xxl/-xxxl no tenían override en este archivo antes → heredaban 16px/20px
+  // del tema Material base (Calendar, Window, Stepper, chat bubble).
   // ---------------------------------------------------------------------------
   --kendo-border-radius-none:          0px;
-  --kendo-border-radius-sm:            2px;
+  --kendo-border-radius-sm:            4px;
   --kendo-border-radius-md:            4px;
-  --kendo-border-radius-lg:            6px;
-  --kendo-border-radius-xl:            8px;
-  --kendo-border-radius-full:          9999px;
+  --kendo-border-radius-lg:            4px;
+  --kendo-border-radius-xl:            4px;
+  --kendo-border-radius-xxl:           4px;
+  --kendo-border-radius-xxxl:          4px;
+  --kendo-border-radius-full:          9999px;   // pill / círculo — excepción
 
   // ---------------------------------------------------------------------------
   // Elevation — superficies planas (React DS: elevation ≤ 2 → sin sombra)

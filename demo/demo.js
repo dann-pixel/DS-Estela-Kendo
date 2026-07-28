@@ -42,7 +42,9 @@ $(function () {
     { text: 'ProgressBar & Loader', icon: 'gear',        id: 'loaders'                     },
     { text: 'Badge & Chip',         icon: 'tag',         id: 'badges'                      },
     { text: 'Tooltip',              icon: 'comment',     id: 'tooltips'                    },
-    { text: 'Avatar',               icon: 'user',        id: 'avatars'                     }
+    { text: 'Avatar',               icon: 'user',        id: 'avatars'                     },
+    { separator: true },
+    { text: 'Changelog',            icon: 'track-changes', id: 'changelog'                 }
   ];
 
   function buildDrawerTemplate(items) {
@@ -755,5 +757,67 @@ $(function () {
     $('#avatar-shapes-row').append($wrap.append($av, $lbl));
     $av.kendoAvatar({ type: 'text', text: 'AB', shape: shape, themeColor: 'primary', size: 'lg' });
   });
+
+  // ════════════════════════════════════════════════════════════════════════
+  // CHANGELOG
+  // Se renderiza en vivo desde CHANGELOG.md (fuente de verdad) — así la vista
+  // nunca queda desincronizada del archivo que documenta los cambios reales.
+  // ════════════════════════════════════════════════════════════════════════
+
+  function markdownInline(text) {
+    return text
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  }
+
+  function renderChangelog(markdown) {
+    var html = '';
+    var inList = false;
+
+    function closeList() {
+      if (inList) { html += '</ul>'; inList = false; }
+    }
+
+    markdown.split('\n').forEach(function (raw) {
+      var line = raw.trim();
+
+      if (!line) { closeList(); return; }
+      if (line.indexOf('# ') === 0) { closeList(); return; } // título H1 — redundante con el de la sección
+      if (line.indexOf('## ') === 0) {
+        closeList();
+        html += '<h3 class="changelog-heading">' + markdownInline(line.slice(3)) + '</h3>';
+        return;
+      }
+      if (line.indexOf('### ') === 0) {
+        closeList();
+        html += '<div class="section-subtitle" style="margin-top:16px">' + markdownInline(line.slice(4)) + '</div>';
+        return;
+      }
+      if (line.indexOf('- ') === 0) {
+        if (!inList) { html += '<ul class="changelog-list">'; inList = true; }
+        html += '<li>' + markdownInline(line.slice(2)) + '</li>';
+        return;
+      }
+      closeList();
+      html += '<p>' + markdownInline(line) + '</p>';
+    });
+
+    closeList();
+    return html;
+  }
+
+  fetch('../CHANGELOG.md')
+    .then(function (res) {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.text();
+    })
+    .then(function (markdown) {
+      document.getElementById('changelog-content').innerHTML = renderChangelog(markdown);
+    })
+    .catch(function () {
+      document.getElementById('changelog-content').innerHTML =
+        '<p>No se pudo cargar <code>CHANGELOG.md</code>.</p>';
+    });
 
 });

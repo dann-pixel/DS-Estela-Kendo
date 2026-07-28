@@ -7,7 +7,11 @@ y este proyecto sigue [Semantic Versioning](https://semver.org/lang/es/).
 
 ## [Unreleased]
 
+### Added
+- Vista "Changelog" en la demo (`demo/index.html` + `demo/demo.js`): hace `fetch` de este mismo archivo y lo renderiza con un parser de Markdown mínimo (headings, listas, `code`, `**bold**`, links) — así la vista nunca queda desincronizada de lo que documenta el changelog real.
+
 ### Changed
+- Unificado `--kendo-border-radius-{sm,md,lg,xl,xxl,xxxl}` a `4px` (antes iban de 2px a 20px según el tamaño) — el DS solo define un `borderRadius` (`shape.borderRadius = 4`), sin escala. `-xxl`/`-xxxl` no tenían override en este archivo y heredaban 16px/20px del tema Material base (Calendar, Window, Stepper, chat bubble), quedando inconsistentes con el resto. `-none` (0px) y `-full` (9999px, pills/círculos: chip, avatar, badge, button rounded-full) quedan como excepciones intencionales.
 - Sincronizados los tokens de color (`secondary`, `error`, `warning`, `info`, `success`) con los valores actuales de `DESIGN_TOKENS.md` del DS React — los tonos cambiaron de familia (ej. `secondary` pasó de azul-púrpura a azul "havelock-blue"), no solo de shade.
 - `on-primary` / `on-secondary` / `on-error` / `on-warning` / `on-info` / `on-success` ahora usan el `contrastText` oscuro del DS en vez de blanco — los tonos main son demasiado claros para pasar WCAG AA con texto blanco.
 - `on-subtle` y `on-surface` de `primary`/`secondary` unificados para usar siempre el valor `dark` (MUI), corrigiendo una inconsistencia en `secondary-on-surface`.
