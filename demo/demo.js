@@ -375,6 +375,10 @@ $(function () {
   // ════════════════════════════════════════════════════════════════════════
 
   $('#chart-bar').kendoChart({
+    // chartArea.background se fija explícito: kendo.dataviz.autoTheme() lo lee
+    // de --kendo-color-app-surface al crear el widget, y esa lectura puede
+    // ganarle la carrera al parseo del CSS si el stylesheet es grande.
+    chartArea: { background: cssVar('--kendo-color-app-surface') || '#fff' },
     legend: { visible: false },
     series: [{
       type:  'bar',
@@ -391,6 +395,7 @@ $(function () {
   });
 
   $('#chart-line').kendoChart({
+    chartArea: { background: cssVar('--kendo-color-app-surface') || '#fff' },
     legend: { position: 'bottom' },
     series: [
       {

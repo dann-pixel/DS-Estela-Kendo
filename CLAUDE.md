@@ -9,6 +9,7 @@ Paquete npm de tema custom para Kendo UI for jQuery, basado en el tema Material 
 ├── package.json          — dependencias y scripts de build
 ├── CLAUDE.md             — este archivo (instrucciones para IA)
 ├── README.md             — documentación pública del paquete
+├── CHANGELOG.md          — historial de cambios (Keep a Changelog)
 ├── scss/
 │   ├── index.scss        — entry point: @use del tema Kendo + @use variables + brand patches
 │   └── _variables.scss   — brand tokens de Estela como CSS custom properties (:root)
@@ -58,7 +59,7 @@ Alineados con el Design System oficial React (`github.com/dann-pixel/DS-Estela-r
 | Border radius | `4px` | `shape.borderRadius` |
 | Elevation estática | `none` | `elevation ≤ 2 → boxShadow: none` |
 
-## Flujo de trabajo: modificar → build → ver
+## Flujo de trabajo: modificar → build → ver → changelog
 
 ```bash
 # 1. Editar brand tokens
@@ -71,7 +72,18 @@ npm run build
 npm run serve          # sirve en http://localhost:3000/demo/
 # — o —
 npm run dev            # watch + serve simultáneo (recompila automáticamente)
+
+# 4. Documentar el cambio en CHANGELOG.md (ver sección "Changelog" abajo)
 ```
+
+## Changelog
+
+**Regla obligatoria: todo cambio en `scss/`, `demo/` o tokens de marca se agrega a `CHANGELOG.md` en la misma tarea que lo introduce.** No se pospone para después ni se agrupa "para más tarde" — si el cambio ya se hizo, la entrada del changelog se escribe antes de terminar la tarea.
+
+- Formato [Keep a Changelog](https://keepachangelog.com/es-ES/1.0.0/): las entradas nuevas van bajo `## [Unreleased]`, en la categoría que corresponda (`Added`, `Changed`, `Fixed`, `Removed`).
+- Una línea por cambio, en español, describiendo el qué y el por qué (no el diff línea por línea).
+- Cuando se publica una versión (bump en `package.json`), la sección `[Unreleased]` se retitula con el número de versión y la fecha, y se abre una `[Unreleased]` nueva y vacía arriba.
+- Esto aplica a cambios hechos por IA y por humanos por igual.
 
 ## Cómo agregar un nuevo token de color
 

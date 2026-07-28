@@ -44,3 +44,24 @@ h1, h2, h3, h4, h5, h6,
   vertical-align: middle;
 }
 
+// Chart / Dialog / Window — Kendo liga su fondo directamente a
+// --kendo-color-surface (gris, reservado para que los inputs no se
+// pierdan sobre fondo blanco — ver _variables.scss). No existe una
+// variable pública independiente para estos tres casos, así que se
+// overridea el selector puntual para que queden blancos:
+//   - .k-var--background: helper interno que kendo.dataviz.autoTheme()
+//     lee para chartArea.background y seriesDefaults.labels.background.
+//   - .k-dialog / .k-window-*: fondo del modal y su titlebar.
+.k-var--background {
+  background-color: var(--kendo-color-app-surface);
+}
+
+.k-dialog {
+  background-color: var(--kendo-color-app-surface);
+}
+
+.k-window-content,
+.k-window-titlebar {
+  background-color: var(--kendo-color-app-surface);
+}
+
