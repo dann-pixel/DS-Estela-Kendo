@@ -24,7 +24,7 @@
       font-family: 'Instrument Sans', sans-serif;
       font-size: 14px;
       background: #F1F5F8;
-      color: rgba(16, 20, 38, 0.87);
+      color: rgba(14, 19, 22, 0.87);
       display: flex;
       flex-direction: column;
       height: 100vh;
@@ -34,7 +34,7 @@
     /* ── AppBar — blanco ── */
     #topbar.k-appbar {
       background: #fff;
-      color: rgba(16, 20, 38, 0.87);
+      color: rgba(14, 19, 22, 0.87);
       border-bottom: 1px solid rgba(0, 0, 0, 0.08);
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
       flex-shrink: 0;
@@ -46,7 +46,7 @@
     }
 
     #topbar #menu-toggle {
-      color: rgba(16, 20, 38, 0.55);
+      color: rgba(14, 19, 22, 0.55);
     }
 
     #topbar #menu-toggle:hover {
@@ -64,7 +64,7 @@
     .app-version {
       font-size: 11px;
       font-weight: 400;
-      color: rgba(16, 20, 38, 0.45);
+      color: rgba(14, 19, 22, 0.45);
       margin-left: 6px;
     }
 
@@ -89,7 +89,7 @@
     }
 
     #side-drawer .k-drawer-item {
-      color: rgba(16, 20, 38, 0.60);
+      color: rgba(14, 19, 22, 0.60);
       font-size: 13px;
       font-weight: 500;
       font-family: 'Instrument Sans', sans-serif;
@@ -162,8 +162,8 @@
       font-family: 'Outfit', sans-serif;
       font-size: 22px;
       font-weight: 400;
-      color: #006A92;              /* primary dark */
-      border-bottom: 2px solid #4255FF;   /* secondary */
+      color: var(--kendo-color-primary-active, #006A92);              /* primary dark */
+      border-bottom: 2px solid var(--kendo-color-secondary, #4688EC);   /* secondary */
       padding-bottom: 8px;
       margin: 0 0 24px;
     }
@@ -171,7 +171,7 @@
     .section-subtitle {
       font-size: 13px;
       font-weight: 600;
-      color: rgba(16, 20, 38, 0.60);   /* text.secondary */
+      color: rgba(14, 19, 22, 0.60);   /* text.secondary */
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin: 24px 0 12px;
@@ -259,7 +259,7 @@
 
     .demo-label {
       font-size: 11px;
-      color: rgba(16, 20, 38, 0.60);   /* text.secondary */
+      color: rgba(14, 19, 22, 0.60);   /* text.secondary */
       text-transform: uppercase;
       letter-spacing: 0.4px;
       margin-bottom: 8px;
@@ -285,7 +285,7 @@
       color: #555;
     }
 
-    #grid-demo, #scheduler-demo {
+    #grid-demo {
       width: 100%;
     }
 
@@ -307,29 +307,8 @@
     }
 
     /* ── Docs links ── */
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .section-header .section-title {
-      margin: 0;
-      flex: 1;
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .section-header::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0; right: 0;
-    }
-
     .section-header-wrap {
-      border-bottom: 2px solid #4255FF;
+      border-bottom: 2px solid var(--kendo-color-secondary, #4688EC);
       padding-bottom: 8px;
       margin-bottom: 24px;
       display: flex;
@@ -357,8 +336,8 @@
       gap: 3px;
       padding: 3px 9px;
       border-radius: 4px;
-      border: 1px solid rgba(66, 85, 255, 0.35);
-      color: #4255FF;
+      border: 1px solid rgba(70, 136, 236, 0.35);
+      color: var(--kendo-color-secondary, #4688EC);
       font-size: 11px;
       font-weight: 600;
       text-decoration: none;
@@ -368,8 +347,8 @@
     }
 
     .docs-link:hover {
-      background: rgba(66, 85, 255, 0.08);
-      border-color: #4255FF;
+      background: rgba(70, 136, 236, 0.08);
+      border-color: var(--kendo-color-secondary, #4688EC);
     }
 
     /* ── Changelog ── */
@@ -409,7 +388,7 @@
     }
 
     #changelog-content a {
-      color: #4255FF;
+      color: var(--kendo-color-secondary, #4688EC);
     }
   </style>
 </head>
@@ -431,13 +410,13 @@
         <a class="docs-link" href="https://docs.telerik.com/kendo-ui/styles-and-layout/sass-themes/customization" target="_blank" rel="noopener">Theme Tokens ↗</a>
       </div>
 
-      <div class="section-subtitle">Primary — Estela Blue</div>
+      <div class="section-subtitle">Primary — Estela Cyan</div>
       <div class="color-grid" id="primary-swatches"></div>
 
-      <div class="section-subtitle">Secondary — Estela Amber</div>
+      <div class="section-subtitle">Secondary — Estela Blue</div>
       <div class="color-grid" id="secondary-swatches"></div>
 
-      <div class="section-subtitle">Tertiary — Estela Teal</div>
+      <div class="section-subtitle">Tertiary — Teal (provisional, no confirmado en el DS React)</div>
       <div class="color-grid" id="tertiary-swatches"></div>
 
       <div class="section-subtitle">Semantic</div>
@@ -719,6 +698,8 @@
           <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/switch/overview" target="_blank" rel="noopener">Switch ↗</a>
           <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/checkbox/overview" target="_blank" rel="noopener">CheckBox ↗</a>
           <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/radiogroup/overview" target="_blank" rel="noopener">RadioGroup ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/slider/overview" target="_blank" rel="noopener">Slider ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/calendar/overview" target="_blank" rel="noopener">Calendar ↗</a>
         </div>
       </div>
 
@@ -782,11 +763,11 @@
           <!-- Fila 1: Nombre + Apellido -->
           <div class="form-row">
             <div class="form-field">
-              <label for="cf-nombre">Nombre <span style="color:var(--kendo-color-error,#ef4444)">*</span></label>
+              <label for="cf-nombre">Nombre <span style="color:var(--kendo-color-error,#F15B50)">*</span></label>
               <input id="cf-nombre" type="text" placeholder="Ingresa el nombre">
             </div>
             <div class="form-field">
-              <label for="cf-apellido">Apellido <span style="color:var(--kendo-color-error,#ef4444)">*</span></label>
+              <label for="cf-apellido">Apellido <span style="color:var(--kendo-color-error,#F15B50)">*</span></label>
               <input id="cf-apellido" type="text" placeholder="Ingresa el apellido">
             </div>
           </div>
@@ -794,7 +775,7 @@
           <!-- Fila 2: Email + Teléfono -->
           <div class="form-row">
             <div class="form-field">
-              <label for="cf-email">Correo electrónico <span style="color:var(--kendo-color-error,#ef4444)">*</span></label>
+              <label for="cf-email">Correo electrónico <span style="color:var(--kendo-color-error,#F15B50)">*</span></label>
               <input id="cf-email" type="email" placeholder="correo@empresa.com">
             </div>
             <div class="form-field">
@@ -806,7 +787,7 @@
           <!-- Fila 3: País + Área -->
           <div class="form-row">
             <div class="form-field">
-              <label for="cf-pais">País <span style="color:var(--kendo-color-error,#ef4444)">*</span></label>
+              <label for="cf-pais">País <span style="color:var(--kendo-color-error,#F15B50)">*</span></label>
               <select id="cf-pais"></select>
             </div>
             <div class="form-field">
@@ -872,6 +853,20 @@
           <div>
             <div class="demo-label">RadioGroup</div>
             <div id="rg-1"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-subtitle">Slider &amp; Calendar</div>
+      <div class="demo-card">
+        <div class="demo-row" style="align-items:flex-start;gap:40px;flex-wrap:wrap">
+          <div style="min-width:260px;flex:1">
+            <div class="demo-label">Slider</div>
+            <div id="slider-1" style="margin-top:12px"></div>
+          </div>
+          <div>
+            <div class="demo-label">Calendar</div>
+            <div id="calendar-1"></div>
           </div>
         </div>
       </div>
@@ -992,6 +987,45 @@
             </p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════ CARDS & FEEDBACK ════════════════════════ -->
+    <section class="section" id="cards">
+      <div class="section-header-wrap">
+        <h2 class="section-title">Cards &amp; Feedback</h2>
+        <div class="docs-links">
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/layout/card/overview" target="_blank" rel="noopener">Card ↗</a>
+          <a class="docs-link" href="https://docs.telerik.com/kendo-ui/controls/stepper/overview" target="_blank" rel="noopener">Stepper ↗</a>
+        </div>
+      </div>
+
+      <div class="section-subtitle">Card — Theme Colors</div>
+      <div class="demo-row" id="card-colors-row"></div>
+
+      <div class="section-subtitle">Card — Con acciones</div>
+      <div class="demo-row">
+        <div class="k-card" style="width:280px">
+          <div class="k-card-header">
+            <h4 class="k-card-title">Reporte mensual</h4>
+            <h6 class="k-card-subtitle">Generado hace 2 horas</h6>
+          </div>
+          <div class="k-card-body">
+            <p style="margin:0">1.284 registros procesados sin errores.</p>
+          </div>
+          <div class="k-card-actions">
+            <button id="card-btn-ver" type="button">Ver detalle</button>
+            <button id="card-btn-exportar" type="button">Exportar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-subtitle">MessageBox — Theme Colors</div>
+      <div class="demo-card" id="messagebox-rows" style="display:flex;flex-direction:column;gap:10px"></div>
+
+      <div class="section-subtitle">Stepper</div>
+      <div class="demo-card">
+        <div id="stepper-1"></div>
       </div>
     </section>
 

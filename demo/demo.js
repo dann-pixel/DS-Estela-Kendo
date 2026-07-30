@@ -38,6 +38,7 @@ $(function () {
     { text: 'Notifications',        icon: 'bell',        id: 'notifications'               },
     { text: 'Pager',                icon: 'pager',       id: 'pager'                       },
     { text: 'Tabs',                 icon: 'tab',         id: 'tabs'                        },
+    { text: 'Cards & Feedback',     icon: 'layout-1-by-4', id: 'cards'                     },
     { separator: true },
     { text: 'ProgressBar & Loader', icon: 'gear',        id: 'loaders'                     },
     { text: 'Badge & Chip',         icon: 'tag',         id: 'badges'                      },
@@ -322,6 +323,12 @@ $(function () {
     value: 'weekly',
   });
 
+  $('#slider-1').kendoSlider({
+    min: 0, max: 100, value: 40, smallStep: 5, largeStep: 20,
+  });
+
+  $('#calendar-1').kendoCalendar({ value: new Date() });
+
   // ════════════════════════════════════════════════════════════════════════
   // GRID
   // ════════════════════════════════════════════════════════════════════════
@@ -411,7 +418,7 @@ $(function () {
         type:     'line',
         name:     'Pasivos',
         data:     [30,28,35,32,38,36,40,38,42,45,43,47],
-        color:    cssVar('--kendo-color-secondary') || '#4255FF',
+        color:    cssVar('--kendo-color-secondary') || '#4688EC',
         markers:  { visible: true, size: 6 },
         dashType: 'dash',
       },
@@ -499,6 +506,42 @@ $(function () {
   // ════════════════════════════════════════════════════════════════════════
 
   $('#tabstrip-1').kendoTabStrip({ animation: { open: { effects: 'fadeIn' } } });
+
+  // ════════════════════════════════════════════════════════════════════════
+  // CARDS & FEEDBACK
+  // Card y MessageBox son markup + clases CSS puras en Kendo v13 (sin widget
+  // JS): .k-card/.k-card-{color} y .k-messagebox/.k-messagebox-{color}.
+  // ════════════════════════════════════════════════════════════════════════
+
+  ['primary', 'secondary', 'tertiary', 'info', 'success', 'warning', 'error', 'dark', 'light', 'inverse'].forEach(function (color) {
+    var $card = $('<div>').addClass('k-card k-card-' + color).css({ width: '150px' });
+    var $body = $('<div>').addClass('k-card-body').text(cap(color));
+    $('#card-colors-row').append($card.append($body));
+  });
+
+  $('#card-btn-ver').kendoButton({ themeColor: 'primary', fillMode: 'flat' });
+  $('#card-btn-exportar').kendoButton({ themeColor: 'base', fillMode: 'flat' });
+  $('#card-btn-ver').on('click', function () { notification.show('Abriendo detalle del reporte…', 'info'); });
+  $('#card-btn-exportar').on('click', function () { notification.show('Reporte exportado.', 'success'); });
+
+  [
+    { color: 'info',    text: 'Hay una actualización disponible en el sistema.' },
+    { color: 'success', text: 'El informe se generó correctamente.' },
+    { color: 'warning', text: 'Revisa los datos antes de continuar.' },
+    { color: 'error',   text: 'Ocurrió un error al procesar la solicitud.' },
+  ].forEach(function (cfg) {
+    var $mb = $('<div>').addClass('k-messagebox k-messagebox-' + cfg.color).text(cfg.text);
+    $('#messagebox-rows').append($mb);
+  });
+
+  $('#stepper-1').kendoStepper({
+    steps: [
+      { label: 'Datos básicos' },
+      { label: 'Configuración' },
+      { label: 'Confirmación' },
+    ],
+    value: 1,
+  });
 
   // ════════════════════════════════════════════════════════════════════════
   // PROGRESSBAR & LOADER

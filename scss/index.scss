@@ -19,17 +19,30 @@
 // Kendo v13. Todo lo que admite variable está en _variables.scss.
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Headings — Outfit (h1–h6), alineado con el React DS.
-// --kendo-font-family solo aplica a componentes Kendo internamente;
-// no existe variable para overridear etiquetas HTML nativas.
+// Headings — Outfit (h1–h6) + escala tipográfica, alineado con el React DS.
+// --kendo-font-family solo aplica a componentes Kendo internamente; no existe
+// variable para overridear etiquetas HTML nativas, así que headings van acá.
+// La escala de tamaños vivía solo en estilos inline de demo/index.html: un
+// proyecto consumidor del paquete heredaba la familia pero no los tamaños.
+// h6 lleva mayúsculas + letter-spacing porque en este DS actúa como label de
+// sección (mismo tratamiento que .section-subtitle en la demo), no solo como
+// heading pequeño.
 h1, h2, h3, h4, h5, h6,
 .k-h1, .k-h2, .k-h3, .k-h4, .k-h5, .k-h6 {
   font-family: 'Outfit', sans-serif;
+  font-weight: 400;
 }
 
-h1, h2, h3, h4, h5, h6,
-.k-h1, .k-h2, .k-h3, .k-h4, .k-h5, .k-h6 {
-  font-weight: 400;
+h1, .k-h1 { font-size: 2rem;    line-height: 1.2; }
+h2, .k-h2 { font-size: 1.5rem;  line-height: 1.25; }
+h3, .k-h3 { font-size: 1.25rem; line-height: 1.3; }
+h4, .k-h4 { font-size: 1rem;    line-height: 1.4; }
+h5, .k-h5 { font-size: .875rem; line-height: 1.4; }
+h6, .k-h6 {
+  font-size: .75rem;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: .5px;
 }
 
 // Grid — fila densa.

@@ -9,9 +9,9 @@
     "scss/"
   ],
   "scripts": {
-    "build": "sass scss/index.scss dist/all.css --style=compressed --no-source-map --load-path=node_modules",
-    "build:dev": "sass scss/index.scss dist/all.css --style=expanded --load-path=node_modules",
-    "watch": "sass --watch scss/index.scss:dist/all.css --style=expanded --load-path=node_modules",
+    "build": "sass scss/index.scss dist/all.css --style=compressed --no-source-map --load-path=node_modules --quiet-deps",
+    "build:dev": "sass scss/index.scss dist/all.css --style=expanded --load-path=node_modules --quiet-deps",
+    "watch": "sass --watch scss/index.scss:dist/all.css --style=expanded --load-path=node_modules --quiet-deps",
     "serve": "npx serve .",
     "dev": "concurrently \"npm run watch\" \"npm run serve\"",
     "prebuild": "mkdir -p dist"

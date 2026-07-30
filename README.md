@@ -76,7 +76,7 @@ import '@estela/kendo-theme/dist/all.css';
 |---|---|---|
 | Primary | `#00B5CC` | Cyan Estela |
 | Primary dark | `#006A92` | Cyan oscuro — texto sobre superficies |
-| Secondary | `#4255FF` | Blue-Purple Estela |
+| Secondary | `#4688EC` | Havelock-blue Estela |
 | Font body | `Instrument Sans` | Texto general |
 | Font headings | `Outfit` | h1–h6 |
 | Border radius | `4px` | Esquinas de componentes |

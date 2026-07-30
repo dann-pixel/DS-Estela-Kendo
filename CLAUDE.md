@@ -53,11 +53,11 @@ Alineados con el Design System oficial React (`github.com/dann-pixel/DS-Estela-r
 |---|---|---|
 | Primary | `#00B5CC` | `palette.primary.main` |
 | Primary dark | `#006A92` | `palette.primary.dark` |
-| Secondary | `#4255FF` | `palette.secondary.main` |
+| Secondary | `#4688EC` | `palette.secondary.main` |
 | Font body | `Instrument Sans` | `typography.fontFamily` |
 | Font headings | `Outfit` | `typography.h1.fontFamily` |
 | Border radius | `4px` | `shape.borderRadius` |
-| Elevation estática | `none` | `elevation ≤ 2 → boxShadow: none` |
+| Elevation estática | `none` | `elevation-1 → boxShadow: none` (botones, cards) |
 
 ## Flujo de trabajo: modificar → build → ver → changelog
 

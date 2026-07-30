@@ -12,10 +12,20 @@
 //   subtle/subtle-hover/subtle-active = tint 88%/80%/70% de main (pálidos, fondos)
 //   hover        = darken ~10% de main
 //   active       = dark (MUI)
-//   emphasis     = light (MUI) — acento suave
+//   emphasis     = tint 40% de main — NO es light (MUI). Ver nota abajo.
 //   on-subtle    = dark (MUI) — texto legible sobre fondos subtle
 //   on-color     = contrastText (MUI) — texto sobre el fondo main sólido
 //   on-surface   = dark (MUI) — texto/ícono de este color sobre superficie blanca
+//
+// Por qué `emphasis` NO es `light` (MUI):
+//   Kendo usa `-emphasis` como color de BORDE / acento de tono medio dibujado
+//   sobre un fondo `-subtle` (MessageBox, Card temático, indicador de Stepper,
+//   ticks de Slider, Suggestion). Mapearlo a `light` de MUI lo dejaba casi
+//   fusionado con el `-subtle` de abajo y el borde desaparecía.
+//   El ratio correcto se derivó del propio default de Material
+//   (primary #6750A4 → emphasis #B6A6D7 sobre subtle #E9DDFF ≈ tint 40%).
+//   `light` de MUI sigue disponible vía los tokens de la escala del DS React;
+//   acá no tiene destino porque Kendo no expone un slot equivalente.
 //
 // Para agregar un token:
 //   1. Busca la CSS var en dist/all.css buscando --kendo-color-
@@ -37,7 +47,7 @@
   --kendo-color-primary:               #00B5CC;   // main
   --kendo-color-primary-hover:         #00A3B8;   // darken ~10%
   --kendo-color-primary-active:        #006A92;   // dark (MUI)
-  --kendo-color-primary-emphasis:      #5FEFE8;   // light (MUI) — accent suave
+  --kendo-color-primary-emphasis:      #66D3E0;   // tint 40% — borde sobre primary-subtle
   --kendo-color-primary-on-subtle:     #006A92;   // dark (MUI) — texto sobre subtle
   --kendo-color-on-primary:            #00293A;   // contrastText (MUI) — PRIMARY_950
   --kendo-color-primary-on-surface:    #006A92;   // dark (MUI) — contraste sobre blanco
@@ -52,7 +62,7 @@
   --kendo-color-secondary:               #4688EC;   // main
   --kendo-color-secondary-hover:         #3F7AD4;   // darken ~10%
   --kendo-color-secondary-active:        #2756CE;   // dark (MUI)
-  --kendo-color-secondary-emphasis:      #99C7F7;   // light (MUI)
+  --kendo-color-secondary-emphasis:      #90B8F4;   // tint 40% — borde sobre secondary-subtle
   --kendo-color-secondary-on-subtle:     #2756CE;   // dark (MUI) — texto sobre subtle
   --kendo-color-on-secondary:            #142040;   // contrastText (MUI)
   --kendo-color-secondary-on-surface:    #2756CE;   // dark (MUI) — contraste sobre blanco
@@ -67,7 +77,7 @@
   --kendo-color-tertiary:               #00796B;
   --kendo-color-tertiary-hover:         #006157;
   --kendo-color-tertiary-active:        #004D43;
-  --kendo-color-tertiary-emphasis:      #4DB6AC;
+  --kendo-color-tertiary-emphasis:      #66AFA6;   // tint 40% — borde sobre tertiary-subtle
   --kendo-color-tertiary-on-subtle:     #004D43;
   --kendo-color-on-tertiary:            #ffffff;
   --kendo-color-tertiary-on-surface:    #00796B;
@@ -80,6 +90,11 @@
   --kendo-color-success-hover:         #26A872;   // darken ~10%
   --kendo-color-success-active:        #126A4A;   // dark (MUI)
   --kendo-color-success-subtle:        #E5F7F0;   // tint 88%
+  --kendo-color-success-subtle-hover:  #D4F1E5;   // tint 80%
+  --kendo-color-success-subtle-active: #BFEBD9;   // tint 70%
+  --kendo-color-success-emphasis:      #7FD6B2;   // tint 40% — borde sobre subtle
+  --kendo-color-success-on-subtle:     #126A4A;   // dark (MUI) — texto sobre subtle
+  --kendo-color-success-on-surface:    #126A4A;   // dark (MUI) — contraste sobre blanco
   --kendo-color-on-success:            #07271D;   // contrastText (MUI)
 
   // ---------------------------------------------------------------------------
@@ -90,6 +105,11 @@
   --kendo-color-warning-hover:         #E39111;   // darken ~10%
   --kendo-color-warning-active:        #9C4F10;   // dark, ramp 800 (MUI)
   --kendo-color-warning-subtle:        #FFF4E3;   // tint 88%
+  --kendo-color-warning-subtle-hover:  #FEECD0;   // tint 80%
+  --kendo-color-warning-subtle-active: #FEE3B8;   // tint 70%
+  --kendo-color-warning-emphasis:      #FDC771;   // tint 40% — borde sobre subtle
+  --kendo-color-warning-on-subtle:     #9C4F10;   // dark 800 (MUI) — texto sobre subtle
+  --kendo-color-warning-on-surface:    #9C4F10;   // dark 800 (MUI) — contraste sobre blanco
   --kendo-color-on-warning:            #442006;   // contrastText (MUI)
 
   // ---------------------------------------------------------------------------
@@ -100,6 +120,11 @@
   --kendo-color-error-hover:           #D95248;   // darken ~10%
   --kendo-color-error-active:          #BA261B;   // dark (MUI)
   --kendo-color-error-subtle:          #FDEBEA;   // tint 88%
+  --kendo-color-error-subtle-hover:    #FCDEDC;   // tint 80%
+  --kendo-color-error-subtle-active:   #FBCECA;   // tint 70%
+  --kendo-color-error-emphasis:        #F79D96;   // tint 40% — borde sobre subtle
+  --kendo-color-error-on-subtle:       #BA261B;   // dark (MUI) — texto sobre subtle
+  --kendo-color-error-on-surface:      #BA261B;   // dark (MUI) — contraste sobre blanco
   --kendo-color-on-error:              #450E0A;   // contrastText (MUI)
 
   // ---------------------------------------------------------------------------
@@ -110,6 +135,11 @@
   --kendo-color-info-hover:            #3BA0C2;   // darken ~10%
   --kendo-color-info-active:           #1E6080;   // dark (MUI)
   --kendo-color-info-subtle:           #E8F6FA;   // tint 88%
+  --kendo-color-info-subtle-hover:     #D9F0F7;   // tint 80%
+  --kendo-color-info-subtle-active:    #C6E8F3;   // tint 70%
+  --kendo-color-info-emphasis:         #8ED1E7;   // tint 40% — borde sobre subtle
+  --kendo-color-info-on-subtle:        #1E6080;   // dark (MUI) — texto sobre subtle
+  --kendo-color-info-on-surface:       #1E6080;   // dark (MUI) — contraste sobre blanco
   --kendo-color-on-info:               #0F2B3D;   // contrastText (MUI)
 
   // ---------------------------------------------------------------------------
@@ -117,26 +147,54 @@
   // Fuente: palette.dark main blueGrey[900] #263238 / light blueGrey[700] #455a64 /
   //         dark #0e1316 (NEUTRAL_DARK) / contrastText #eceff1 (NEUTRAL_LIGHT)
   // ---------------------------------------------------------------------------
+  // NOTA: en el default de Material, `dark-subtle-hover/-active` van MÁS CLAROS
+  // que `-subtle` (#B0ABB7 → #CCC7D4 → #DED8E0). Acá `-subtle` ya es blueGrey[50],
+  // casi blanco, así que aclararlo más lo haría indistinguible del fondo: se
+  // sigue la convención del resto de este archivo (hover/active oscurecen).
   --kendo-color-dark:                  #263238;   // blueGrey[900] (main)
   --kendo-color-dark-hover:            #455A64;   // blueGrey[700] (light, MUI)
   --kendo-color-dark-active:           #0E1316;   // NEUTRAL_DARK (dark, MUI)
   --kendo-color-dark-subtle:           #ECEFF1;   // blueGrey[50]
+  --kendo-color-dark-subtle-hover:     #CFD8DC;   // blueGrey[100]
+  --kendo-color-dark-subtle-active:    #B0BEC5;   // blueGrey[200]
+  --kendo-color-dark-emphasis:         #78909C;   // blueGrey[400] — borde sobre subtle
+  --kendo-color-dark-on-subtle:        #263238;   // blueGrey[900] — texto sobre subtle claro
+  --kendo-color-dark-on-surface:       #263238;   // blueGrey[900] — contraste sobre blanco
   --kendo-color-on-dark:               #ECEFF1;   // NEUTRAL_LIGHT (contrastText, MUI)
 
   // ---------------------------------------------------------------------------
   // Light — BlueGrey[50] (superficie clara neutral)
+  // `light-subtle` va MÁS CLARO que `light` (igual que en el default de Material,
+  // donde light #F7F3FA → light-subtle #FEFBFF): es el extremo pálido de la rampa.
+  // `light-on-surface` es el caso incómodo del tema: "tinta light sobre superficie
+  // blanca" es invisible por definición (Material lo resuelve con el propio main).
+  // Acá se usa blueGrey[200], el tono más oscuro que sigue leyéndose como "light",
+  // para que iconos/textos con esta variante no desaparezcan sobre blanco.
   // ---------------------------------------------------------------------------
+  --kendo-color-light-subtle:          #F7F9FA;   // blueGrey[50] aclarado
+  --kendo-color-light-subtle-hover:    #ECEFF1;   // blueGrey[50]
+  --kendo-color-light-subtle-active:   #DDE6ED;
   --kendo-color-light:                 #ECEFF1;   // blueGrey[50]
   --kendo-color-light-hover:           #CFD8DC;   // blueGrey[100]
   --kendo-color-light-active:          #B0BEC5;   // blueGrey[200]
+  --kendo-color-light-emphasis:        #B0BEC5;   // blueGrey[200] — borde sobre subtle
+  --kendo-color-light-on-subtle:       #263238;   // blueGrey[900] — texto sobre subtle
+  --kendo-color-light-on-surface:      #B0BEC5;   // blueGrey[200] — ver nota arriba
   --kendo-color-on-light:              #263238;   // blueGrey[900] — texto oscuro ✓
 
   // ---------------------------------------------------------------------------
   // Inverse — NEUTRAL_DARK (anclaje de texto primario en light mode)
+  // Kendo trata `inverse` como espejo de `dark`: misma estructura de rampa.
   // ---------------------------------------------------------------------------
+  --kendo-color-inverse-subtle:        #ECEFF1;   // blueGrey[50]
+  --kendo-color-inverse-subtle-hover:  #CFD8DC;   // blueGrey[100]
+  --kendo-color-inverse-subtle-active: #B0BEC5;   // blueGrey[200]
   --kendo-color-inverse:               #0E1316;   // NEUTRAL_DARK
   --kendo-color-inverse-hover:         #1B2027;
   --kendo-color-inverse-active:        #282D38;
+  --kendo-color-inverse-emphasis:      #78909C;   // blueGrey[400] — borde sobre subtle
+  --kendo-color-inverse-on-subtle:     #0E1316;   // NEUTRAL_DARK — texto sobre subtle claro
+  --kendo-color-inverse-on-surface:    #0E1316;   // NEUTRAL_DARK — contraste sobre blanco
   --kendo-color-on-inverse:            #ECEFF1;   // NEUTRAL_LIGHT
 
   // ---------------------------------------------------------------------------
@@ -176,6 +234,58 @@
   --kendo-color-border-alt:            rgba(0, 0, 0, 0.15);
 
   // ---------------------------------------------------------------------------
+  // Chart series — paleta categórica de marca
+  // ---------------------------------------------------------------------------
+  // Kendo deriva las 30 `--kendo-chart-series-1..30` de estas 6 familias:
+  //   1–6   = series-{a..f}            (main)
+  //   7–12  = series-{a..f}-subtle     (tint 25%)
+  //   13–18 = series-{a..f}-bold       (shade 25%)
+  //   19–24 = series-{a..f}-subtler    (tint 50%)
+  //   25–30 = series-{a..f}-bolder     (shade 50%)
+  // Los ratios tint/shade se derivaron del default de Material
+  // (series-a #9C27B0 → subtle #B55DC4 / bold #751D84 / bolder #4E1458).
+  //
+  // Orden de las 6 familias: alterna frío/cálido para que dos series contiguas
+  // nunca compartan familia de tono (cyan → ámbar → azul → verde → coral → teal).
+  // Todos los tonos salen de la paleta del DS; no hay colores inventados.
+  // ---------------------------------------------------------------------------
+  --kendo-color-series-a:              #00B5CC;   // primary   — cyan
+  --kendo-color-series-a-subtle:       #40C8D9;
+  --kendo-color-series-a-subtler:      #80DAE6;
+  --kendo-color-series-a-bold:         #008899;
+  --kendo-color-series-a-bolder:       #005A66;
+
+  --kendo-color-series-b:              #FCA113;   // warning   — ámbar
+  --kendo-color-series-b-subtle:       #FDB84E;
+  --kendo-color-series-b-subtler:      #FED089;
+  --kendo-color-series-b-bold:         #BD790E;
+  --kendo-color-series-b-bolder:       #7E500A;
+
+  --kendo-color-series-c:              #4688EC;   // secondary — azul
+  --kendo-color-series-c-subtle:       #74A6F1;
+  --kendo-color-series-c-subtler:      #A2C4F6;
+  --kendo-color-series-c-bold:         #3466B1;
+  --kendo-color-series-c-bolder:       #234476;
+
+  --kendo-color-series-d:              #2ABB7F;   // success   — verde
+  --kendo-color-series-d-subtle:       #5FCC9F;
+  --kendo-color-series-d-subtler:      #94DDBF;
+  --kendo-color-series-d-bold:         #208C5F;
+  --kendo-color-series-d-bolder:       #155E40;
+
+  --kendo-color-series-e:              #F15B50;   // error     — coral
+  --kendo-color-series-e-subtle:       #F4847C;
+  --kendo-color-series-e-subtler:      #F8ADA8;
+  --kendo-color-series-e-bold:         #B5443C;
+  --kendo-color-series-e-bolder:       #782E28;
+
+  --kendo-color-series-f:              #00796B;   // tertiary  — teal
+  --kendo-color-series-f-subtle:       #409A90;
+  --kendo-color-series-f-subtler:      #80BCB5;
+  --kendo-color-series-f-bold:         #005B50;
+  --kendo-color-series-f-bolder:       #003C36;
+
+  // ---------------------------------------------------------------------------
   // Typography — Instrument Sans (body) · Outfit se aplica en index.scss
   // Fuente: typography.fontFamily = 'Instrument Sans'
   //         typography.h1-h6.fontFamily = 'Outfit'
@@ -205,10 +315,20 @@
   --kendo-border-radius-full:          9999px;   // pill / círculo — excepción
 
   // ---------------------------------------------------------------------------
-  // Elevation — superficies planas (React DS: elevation ≤ 2 → sin sombra)
+  // Elevation — superficies planas (React DS: elevation-1 → sin sombra)
   // Botones, chips y cards estáticas usan elevation-1.
-  // Overlays flotantes (Dialog, Popup, Tooltip) usan elevation-2/3 → sin cambio.
+  // Overlays flotantes (Dialog, Popup, Tooltip) usan elevation-2/3 → sin cambio,
+  // ahí la sombra es lo que separa el overlay del fondo.
   // ---------------------------------------------------------------------------
   --kendo-elevation-1:                 none;
+
+  // ---------------------------------------------------------------------------
+  // Spacing — decisión: NO se mapea a la escala de MUI (B1 de AUDITORIA.md)
+  // MUI usa spacing(1) = 8px; Kendo usa --kendo-spacing-1 = 0.25rem (base 4px).
+  // Mapear la escala completa (34 variables) cambiaría el padding/gap de TODOS
+  // los componentes Kendo simultáneamente — alto impacto visual, requiere su
+  // propia revisión aislada con la demo completa, no un cambio de auditoría.
+  // Se documenta la decisión para que no se lea como un olvido.
+  // ---------------------------------------------------------------------------
 
 }
